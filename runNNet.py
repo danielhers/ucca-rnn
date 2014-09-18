@@ -3,8 +3,9 @@ import pickle as pickle
 
 import sgd as optimizer
 import rntn as nnet
-import uccatree as tr
 import time
+
+from uccatree import *
 
 def run(args=None):
     usage = "usage : %prog [options]"
@@ -37,8 +38,8 @@ def run(args=None):
     
     print("Loading data...")
     # load training data
-    trees = tr.loadTrees()
-    opts.numWords = len(tr.loadWordMap())
+    trees = loadTrees()
+    opts.numWords = len(loadWordMap())
 
     rnn = nnet.RNN(opts.wvecDim,opts.outputDim,opts.numWords,opts.minibatch)
     rnn.initParams()
@@ -59,7 +60,7 @@ def run(args=None):
             rnn.toFile(fid)
 
 def test(netFile,dataSet):
-    trees = tr.loadTrees(dataSet)
+    trees = loadTrees(dataSet)
     assert netFile is not None, "Must give model to test"
     with open(netFile,'rb') as fid:
         opts = pickle.load(fid)
