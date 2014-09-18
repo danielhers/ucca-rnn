@@ -69,7 +69,7 @@ class RNN:
 
         # scale cost and grad by mb size
         scale = (1./self.mbSize)
-        for v in self.dL.itervalues():
+        for v in self.dL.values():
             v *=scale
         
         # Add L2 Regularization 
@@ -158,21 +158,21 @@ class RNN:
             for P,dP in zip(self.stack[1:],update[1:]):
                 pRMS = np.sqrt(np.mean(P**2))
                 dpRMS = np.sqrt(np.mean((scale*dP)**2))
-                print "weight rms=%f -- update rms=%f"%(pRMS,dpRMS)
+                print("weight rms=%f -- update rms=%f"%(pRMS,dpRMS))
 
         self.stack[1:] = [P+scale*dP for P,dP in zip(self.stack[1:],update[1:])]
 
         # handle dictionary update sparsely
         dL = update[0]
-        for j in dL.iterkeys():
+        for j in dL.keys():
             self.L[:,j] += scale*dL[j]
 
     def toFile(self,fid):
-        import cPickle as pickle
+        import pickle as pickle
         pickle.dump(self.stack,fid)
 
     def fromFile(self,fid):
-        import cPickle as pickle
+        import pickle as pickle
         self.stack = pickle.load(fid)
 
     def check_grad(self,data,epsilon=1e-6):
@@ -182,26 +182,26 @@ class RNN:
         for W,dW in zip(self.stack[1:],grad[1:]):
             W = W[...,None] # add dimension since bias is flat
             dW = dW[...,None] 
-            for i in xrange(W.shape[0]):
-                for j in xrange(W.shape[1]):
+            for i in range(W.shape[0]):
+                for j in range(W.shape[1]):
                     W[i,j] += epsilon
                     costP,_ = self.costAndGrad(data)
                     W[i,j] -= epsilon
                     numGrad = (costP - cost)/epsilon
                     err = np.abs(dW[i,j] - numGrad)
-                    print "Analytic %.9f, Numerical %.9f, Relative Error %.9f"%(dW[i,j],numGrad,err)
+                    print("Analytic %.9f, Numerical %.9f, Relative Error %.9f"%(dW[i,j],numGrad,err))
 
         # check dL separately since dict
         dL = grad[0]
         L = self.stack[0]
-        for j in dL.iterkeys():
-            for i in xrange(L.shape[0]):
+        for j in dL.keys():
+            for i in range(L.shape[0]):
                 L[i,j] += epsilon
                 costP,_ = self.costAndGrad(data)
                 L[i,j] -= epsilon
                 numGrad = (costP - cost)/epsilon
                 err = np.abs(dL[j][i] - numGrad)
-                print "Analytic %.9f, Numerical %.9f, Relative Error %.9f"%(dL[j][i],numGrad,err)
+                print("Analytic %.9f, Numerical %.9f, Relative Error %.9f"%(dL[j][i],numGrad,err))
 
 
 if __name__ == '__main__':
@@ -218,7 +218,7 @@ if __name__ == '__main__':
 
     mbData = train[:4]
     
-    print "Numerical gradient check..."
+    print("Numerical gradient check...")
     rnn.check_grad(mbData)
 
 

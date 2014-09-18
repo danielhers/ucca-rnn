@@ -1,5 +1,5 @@
 import optparse
-import cPickle as pickle
+import pickle as pickle
 
 import sgd as optimizer
 import rntn as nnet
@@ -35,7 +35,7 @@ def run(args=None):
         test(opts.inFile,opts.data)
         return
     
-    print "Loading data..."
+    print("Loading data...")
     # load training data
     trees = tr.loadTrees()
     opts.numWords = len(tr.loadWordMap())
@@ -48,12 +48,12 @@ def run(args=None):
 
     for e in range(opts.epochs):
         start = time.time()
-        print "Running epoch %d"%e
+        print("Running epoch %d"%e)
         sgd.run(trees)
         end = time.time()
-        print "Time per epoch : %f"%(end-start)
+        print("Time per epoch : %f"%(end-start))
 
-        with open(opts.outFile,'w') as fid:
+        with open(opts.outFile,'wb') as fid:
             pickle.dump(opts,fid)
             pickle.dump(sgd.costt,fid)
             rnn.toFile(fid)
@@ -61,15 +61,15 @@ def run(args=None):
 def test(netFile,dataSet):
     trees = tr.loadTrees(dataSet)
     assert netFile is not None, "Must give model to test"
-    with open(netFile,'r') as fid:
+    with open(netFile,'rb') as fid:
         opts = pickle.load(fid)
         _ = pickle.load(fid)
         rnn = nnet.RNN(opts.wvecDim,opts.outputDim,opts.numWords,opts.minibatch)
         rnn.initParams()
         rnn.fromFile(fid)
-    print "Testing..."
+    print("Testing...")
     cost,correct,total = rnn.costAndGrad(trees,test=True)
-    print "Cost %f, Correct %d/%d, Acc %f"%(cost,correct,total,correct/float(total))
+    print("Cost %f, Correct %d/%d, Acc %f"%(cost,correct,total,correct/float(total)))
 
 
 if __name__=='__main__':

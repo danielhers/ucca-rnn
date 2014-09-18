@@ -13,9 +13,9 @@ class SGD:
         self.minibatch = minibatch # minibatch
         self.optimizer = optimizer
         if self.optimizer == 'sgd':
-            print "Using sgd.."
+            print("Using sgd...")
         elif self.optimizer == 'adagrad':
-            print "Using adagrad..."
+            print("Using adagrad...")
             epsilon = 1e-8
             self.gradt = [epsilon + np.zeros(W.shape) for W in self.model.stack]
         else:
@@ -34,7 +34,7 @@ class SGD:
         # randomly shuffle data
         random.shuffle(trees)
 
-        for i in xrange(0,m-self.minibatch+1,self.minibatch):
+        for i in range(0,m-self.minibatch+1,self.minibatch):
             self.it += 1
 
             mb_data = trees[i:i+self.minibatch]
@@ -62,7 +62,7 @@ class SGD:
                 # handle dictionary separately
                 dL = grad[0]
                 dLt = self.gradt[0]
-                for j in dL.iterkeys():
+                for j in dL.keys():
                     dLt[:,j] = dLt[:,j] + dL[j]**2
                     dL[j] = dL[j] * (1./np.sqrt(dLt[:,j]))
                 update = [dL] + update
@@ -74,5 +74,5 @@ class SGD:
 
             self.costt.append(cost)
             if self.it%1 == 0:
-                print "Iter %d : Cost=%.4f, ExpCost=%.4f."%(self.it,cost,self.expcost[-1])
+                print("Iter %d : Cost=%.4f, ExpCost=%.4f."%(self.it,cost,self.expcost[-1]))
             
