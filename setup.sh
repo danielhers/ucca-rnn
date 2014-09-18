@@ -1,13 +1,14 @@
 #!/bin/bash
 
-# Get trees
-data=trainDevTestTrees_PTB.zip
-curl -O http://nlp.stanford.edu/sentiment/$data
-unzip $data 
+# Get passages
+data=ucca_corpus_xmls.tgz
+curl -O http://homepages.inf.ed.ac.uk/oabend/ucca/$data
+mkdir passages
+tar xvzf $data -C passages
 rm -f $data
 
-# Convert trees
-python tree.py
+# Convert to trees
+python uccatree.py
 
 # Create directory for saved models
 mkdir models

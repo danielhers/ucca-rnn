@@ -3,7 +3,7 @@ import cPickle as pickle
 
 import sgd as optimizer
 import rntn as nnet
-import tree as tr
+import uccatree as tr
 import time
 
 def run(args=None):
