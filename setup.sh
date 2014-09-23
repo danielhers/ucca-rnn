@@ -1,5 +1,9 @@
 #!/bin/bash
 
+mkdir -p passages trees models
+
+export PYTHONPATH=${PYTHONPATH}:..
+
 # Get passages
 data=ucca_corpus_xmls.tgz
 curl -O http://homepages.inf.ed.ac.uk/oabend/ucca/$data
