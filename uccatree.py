@@ -1,5 +1,5 @@
 import collections
-import pickle as pickle
+import pickle
 import xml.etree.ElementTree as ET
 from glob import glob
 from ucca import convert, layer0
@@ -37,6 +37,16 @@ class Node:
             self.right = aux
             self.right.parent = self
             aux.set_children_binarized(children[1:])
+            
+    def __str__(self):
+        return self.label if self.word is None else self.word
+    
+    def subtree_str(self):
+        if self.isLeaf:
+            return self.__str__()
+        else:
+            return "(%s %s %s)"%(self.left.subtree_str(), self,
+                                 self.right.subtree_str())
 
 class Tree:
 
@@ -57,6 +67,9 @@ class Tree:
         children = [self.build(x) for x in ucca_node.children]
         node.set_children_binarized(children)
         return node
+    
+    def __str__(self):
+        return self.root.subtree_str()
 
         
 
