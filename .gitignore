@@ -1,4 +1,6 @@
 /*.bin
 /*.pyc
-trees/
-models/
+/trees/
+/models/
+/passages/
+/__pycache__/
