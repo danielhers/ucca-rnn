@@ -206,12 +206,12 @@ class RNN:
 
 if __name__ == '__main__':
 
-    import tree as treeM
-    train = treeM.loadTrees()
-    numW = len(treeM.loadWordMap())
+    import uccatree
+    train = uccatree.loadTrees()
+    numW = len(uccatree.loadWordMap())
+    outputDim = len(uccatree.loadLabelMap())
 
     wvecDim = 10
-    outputDim = 5
 
     rnn = RNN(wvecDim,outputDim,numW,mbSize=4)
     rnn.initParams()

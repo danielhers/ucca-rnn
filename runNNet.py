@@ -1,5 +1,5 @@
 import optparse
-import pickle as pickle
+import pickle
 
 import sgd as optimizer
 import rntn as nnet
@@ -20,7 +20,7 @@ def run(args=None):
     parser.add_option("--epochs",dest="epochs",type="int",default=50)
     parser.add_option("--step",dest="step",type="float",default=1e-2)
 
-    parser.add_option("--outputDim",dest="outputDim",type="int",default=5)
+    parser.add_option("--outputDim",dest="outputDim",type="int",default=0)
     parser.add_option("--wvecDim",dest="wvecDim",type="int",default=30)
     parser.add_option("--outFile",dest="outFile",type="string",
         default="models/test.bin")
@@ -40,6 +40,8 @@ def run(args=None):
     # load training data
     trees = loadTrees()
     opts.numWords = len(loadWordMap())
+    if opts.outputDim == 0:
+        opts.outputDim = len(loadLabelMap())
 
     rnn = nnet.RNN(opts.wvecDim,opts.outputDim,opts.numWords,opts.minibatch)
     rnn.initParams()

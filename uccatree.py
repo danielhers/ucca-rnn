@@ -62,8 +62,10 @@ class Tree:
         """
         Convert a UCCA node to a tree node along with its children
         """
-        node = Node(ucca_node.tag, ucca_node.text
-                    if ucca_node.layer.ID == layer0.LAYER_ID else None)
+        if ucca_node.layer.ID == layer0.LAYER_ID:
+            node = Node(ucca_node.tag, ucca_node.text)
+        else:
+            node = Node(ucca_node.tag)
         children = [self.build(x) for x in ucca_node.children]
         node.set_children_binarized(children)
         return node
@@ -89,6 +91,9 @@ def countWords(node,words):
     if node.isLeaf:
         words[node.word] += 1
 
+def countLabels(node,labels):
+    labels[node.label] += 1
+
 def mapWords(node,wordMap):
     if node.isLeaf:
         if node.word not in wordMap:
@@ -96,8 +101,15 @@ def mapWords(node,wordMap):
         else:
             node.word = wordMap[node.word]
 
+def mapLabels(node,labelMap):
+    node.label = labelMap[node.label]
+
 def loadWordMap():
     with open('wordMap.bin','rb') as fid:
+        return pickle.load(fid)
+
+def loadLabelMap():
+    with open('labelMap.bin','rb') as fid:
         return pickle.load(fid)
 
 def buildWordMap(trees):
@@ -117,6 +129,19 @@ def buildWordMap(trees):
     with open(f,'wb') as fid:
         pickle.dump(wordMap,fid)
     print("Wrote '%s'"%f)
+
+def buildLabelMap(trees):
+    print("Counting labels...")
+    labels = collections.defaultdict(int)
+    for tree in trees:
+        leftTraverse(tree.root,nodeFn=countLabels,args=labels)
+    
+    labelsMap = dict(list(zip(iter(labels.keys()),list(range(len(labels))))))
+
+    f = 'labelMap.bin'
+    with open(f,'wb') as fid:
+        pickle.dump(labelsMap,fid)
+    print("Wrote '%s'"%f)
         
 def loadTrees(dataSet='train'):
     """
@@ -126,8 +151,10 @@ def loadTrees(dataSet='train'):
         trees = pickle.load(fid)
         
     wordMap = loadWordMap()
+    labelMap = loadLabelMap()
     for tree in trees:
         leftTraverse(tree.root,nodeFn=mapWords,args=wordMap)
+        leftTraverse(tree.root,nodeFn=mapLabels,args=labelMap)
     return trees
 
 def buildTrees():
@@ -146,6 +173,7 @@ def buildTrees():
         print("Wrote '%s'"%f)
             
     buildWordMap(trees['train'])
+    buildLabelMap(trees['train'])
     return trees
       
 if __name__=='__main__':
