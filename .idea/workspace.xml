@@ -2,12 +2,389 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5b28e83b-65b2-488d-b330-22c2dd3871a9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/ucca-rntn.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/trees_backup/dev.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/trees_backup/test.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/trees_backup/train.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/setup_toy.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/toy.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage1018.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage1019.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage1020.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage1021.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage1022.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage1023.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage1024.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage1025.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage1026.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage1027.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage1028.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage104.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage105.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage106.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage107.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage114.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage115.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage116.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage123.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage124.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage125.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage126.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage127.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage128.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage129.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage130.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage131.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage132.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage133.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage134.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage135.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage136.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage137.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage138.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage139.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage140.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage141.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage142.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage143.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage144.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage145.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage146.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage147.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage148.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage149.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage150.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage179.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage180.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage181.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage182.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage183.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage184.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage185.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage186.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage187.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage188.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage189.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage190.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage191.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage192.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage193.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage194.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage195.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage196.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage197.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage198.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage199.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage20.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage200.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage201.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage202.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage203.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage204.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage205.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage206.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage207.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage208.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage209.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage210.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage211.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage212.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage213.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage214.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage215.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage216.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage217.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage218.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage219.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage220.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage221.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage222.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage223.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage224.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage225.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage226.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage227.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage228.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage229.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage230.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage231.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage232.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage233.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage234.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage235.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage236.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage237.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage238.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage243.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage244.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage245.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage246.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage247.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage248.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage249.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage250.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage251.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage252.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage253.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage28.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage376.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage377.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage378.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage379.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage380.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage381.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage382.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage449.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage450.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage451.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage452.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage453.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage454.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage455.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage456.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage457.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage458.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage459.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage460.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage461.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage462.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage463.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage466.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage467.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage468.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage469.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage470.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage471.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage472.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage473.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage474.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage475.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage476.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage477.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage478.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage479.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage485.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage486.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage487.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage488.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage489.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage490.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage491.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage492.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage493.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage494.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage495.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage496.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage497.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage498.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage499.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage500.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage501.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage502.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage503.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage505.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage506.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage507.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage508.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage509.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage510.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage511.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage512.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage514.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage515.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage516.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage519.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage520.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage521.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage522.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage523.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage524.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage525.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage526.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage527.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage528.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage529.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage530.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage531.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage532.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage533.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage534.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage536.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage537.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage538.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage539.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage540.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage541.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage542.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage543.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage544.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage545.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage546.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage547.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage548.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage549.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage550.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage551.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage552.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage553.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage554.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage555.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage556.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage557.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage558.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage559.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage560.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage561.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage562.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage563.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage564.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage565.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage566.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage567.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage585.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage586.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage587.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage588.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage589.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage590.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage591.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage592.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage593.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage594.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage599.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage600.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage601.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage602.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage603.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage604.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage605.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage606.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage607.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage608.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage610.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage611.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage612.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage613.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage614.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage615.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage616.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage617.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage618.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage629.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage63.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage630.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage631.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage632.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage633.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage634.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage635.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage636.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage637.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage638.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage639.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage640.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage641.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage642.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage643.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage644.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage645.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage646.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage647.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage648.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage649.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage650.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage651.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage652.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage653.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage654.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage655.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage656.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage657.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage658.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage659.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage66.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage660.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage661.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage662.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage663.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage664.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage665.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage666.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage667.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage668.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage669.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage670.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage671.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage672.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage673.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage674.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage675.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage676.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage688.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage689.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage690.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage691.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage692.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage693.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage694.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage695.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage696.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage697.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage698.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage699.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage700.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage701.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage702.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage703.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage704.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage705.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage706.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage707.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage708.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage709.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage710.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage711.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage712.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage725.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage726.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage727.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage728.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage729.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage730.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage806.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage807.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage808.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage942.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage943.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage944.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage945.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage946.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage947.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage948.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/test/ucca_passage949.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage950.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage953.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage954.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage955.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/dev/ucca_passage956.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage957.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage958.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage959.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage960.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage961.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage962.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage963.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage964.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/passages_backup/train/ucca_passage965.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rnn.py" afterPath="$PROJECT_DIR$/rnn.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rntn.py" afterPath="$PROJECT_DIR$/rntn.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/run.sh" afterPath="$PROJECT_DIR$/run.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/runNNet.py" afterPath="$PROJECT_DIR$/runNNet.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.sh" afterPath="$PROJECT_DIR$/setup.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sgd.py" afterPath="$PROJECT_DIR$/sgd.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.sh" afterPath="$PROJECT_DIR$/test.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ucca-rntn.iml" afterPath="$PROJECT_DIR$/.idea/ucca-rntn.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/uccatree.py" afterPath="$PROJECT_DIR$/uccatree.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ucca-rntn.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,13 +407,49 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="runNNet.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="runNNet.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/runNNet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.48633257" vertical-offset="427" max-vertical-offset="1305">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="628" max-vertical-offset="1548">
+              <caret line="72" column="47" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rntn.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/rntn.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7414966" vertical-offset="1470" max-vertical-offset="4446">
+              <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sgd.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sgd.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="603" max-vertical-offset="1512">
+              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="uccatree.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/uccatree.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2691" max-vertical-offset="3600">
+              <caret line="178" column="0" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -52,11 +465,34 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/sgd.py" />
+        <option value="$PROJECT_DIR$/run.sh" />
+        <option value="$PROJECT_DIR$/../ucca/ucca/convert.py" />
+        <option value="$PROJECT_DIR$/../ucca/ucca/features.py" />
+        <option value="$PROJECT_DIR$/../ucca/ucca/layer1.py" />
+        <option value="$PROJECT_DIR$/../ucca/ucca/lex.py" />
+        <option value="$PROJECT_DIR$/../ucca/ucca/scenes.py" />
+        <option value="$PROJECT_DIR$/../ucca/ucca/tokeneval.py" />
+        <option value="$PROJECT_DIR$/../ucca/ucca/wikt.py" />
+        <option value="$PROJECT_DIR$/setup.sh" />
+        <option value="$PROJECT_DIR$/uccatree.py" />
+        <option value="$PROJECT_DIR$/passages/train/toy.xml" />
+        <option value="$PROJECT_DIR$/setup_toy.sh" />
+        <option value="$PROJECT_DIR$/test.sh" />
+        <option value="$PROJECT_DIR$/runNNet.py" />
+        <option value="$PROJECT_DIR$/rnn.py" />
+        <option value="$PROJECT_DIR$/rntn.py" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="260" />
-    <option name="y" value="40" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+    <option name="x" value="-1" />
+    <option name="y" value="25" />
+    <option name="width" value="1922" />
+    <option name="height" value="1031" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -100,6 +536,136 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trees_backup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="passages_backup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="passages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="train" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="passages" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ucca-rntn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -114,11 +680,21 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ucca" />
+    <property name="recentsLimit" value="5" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
       <console-settings />
     </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../ucca/ucca" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
@@ -285,28 +861,48 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="260" y="40" width="1400" height="1000" extended-state="0" />
-    <editor active="false" />
+    <frame x="-1" y="25" width="1922" height="1031" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18177083" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -331,10 +927,264 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/runNNet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.48633257" vertical-offset="427" max-vertical-offset="1305">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1566">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runNNet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1305">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="909">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.040723983" vertical-offset="0" max-vertical-offset="884">
+          <caret line="2" column="39" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/ucca/classify.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07920792" vertical-offset="0" max-vertical-offset="4302">
+          <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/ucca/collins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.13861386" vertical-offset="0" max-vertical-offset="3438">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#182#195#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/ucca/core.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="17784">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/ucca/features.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2761276" vertical-offset="1" max-vertical-offset="7524">
+          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/ucca/layer0.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3690">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/ucca/layer1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.23652366" vertical-offset="1" max-vertical-offset="10764">
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/ucca/lex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0990099" vertical-offset="0" max-vertical-offset="3294">
+          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/ucca/postags.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="909">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/ucca/scenes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15731573" vertical-offset="1" max-vertical-offset="3312">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/ucca/tokeneval.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.01980198" vertical-offset="0" max-vertical-offset="1836">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/ucca/util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="909">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/ucca/wikt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07920792" vertical-offset="0" max-vertical-offset="2754">
+          <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/tests/test_ucca_ut.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.00110011" vertical-offset="1" max-vertical-offset="15408">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#61#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/scripts/add_new_exemplars.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1026">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/scripts/create_exemplars.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="909">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#50#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sgd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="603" max-vertical-offset="1512">
+          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.88" vertical-offset="0" max-vertical-offset="414">
+          <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ucca/ucca/convert.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="10506" max-vertical-offset="12600">
+          <caret line="600" column="14" selection-start-line="600" selection-start-column="4" selection-end-line="600" selection-end-column="14" />
+          <folding>
+            <element signature="e#304#319#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/passages/train/toy.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="896">
+          <caret line="0" column="2923" selection-start-line="0" selection-start-column="2923" selection-end-line="0" selection-end-column="2923" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/toy.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="896">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup_toy.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.101809956" vertical-offset="0" max-vertical-offset="884">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24434389" vertical-offset="0" max-vertical-offset="884">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uccatree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2691" max-vertical-offset="3600">
+          <caret line="178" column="0" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.8910892" vertical-offset="0" max-vertical-offset="4194">
+          <caret line="146" column="0" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runNNet.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="628" max-vertical-offset="1548">
+          <caret line="72" column="47" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rntn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7414966" vertical-offset="1470" max-vertical-offset="4446">
+          <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>

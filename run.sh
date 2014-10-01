@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PYTHONPATH=${PYTHONPATH}:..
+export PYTHONPATH=${PYTHONPATH}:../ucca
 
 # verbose
 set -x

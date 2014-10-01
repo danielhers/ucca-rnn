@@ -2,7 +2,7 @@
 
 mkdir -p passages trees models
 
-export PYTHONPATH=${PYTHONPATH}:..
+export PYTHONPATH=${PYTHONPATH}:../ucca
 
 # Get passages
 data=ucca_corpus_xmls.tgz

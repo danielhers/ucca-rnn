@@ -6,52 +6,53 @@ from ucca import convert, layer0
 
 UNK = 'UNK'
 
+
 class Node:
-    def __init__(self,label,word=None):
-        self.label = label 
+    def __init__(self, label, word=None):
+        self.label = label
         self.word = word
         self.parent = None
         self.left = None
         self.right = None
         self.isLeaf = False
         self.fprop = False
-        
+
     def set_children_binarized(self, children):
-        if len(children) == 0: # No children: leaf node
+        if len(children) == 0:  # No children: leaf node
             self.isLeaf = True
-        elif len(children) == 1: # One child: cut off self
+        elif len(children) == 1:  # One child: cut off self
             child = children[0]
             self.label = child.label
             self.word = child.word
             self.left = child.left
             self.right = child.right
             self.isLeaf = child.isLeaf
-        elif len(children) == 2: # Two children: left and right
+        elif len(children) == 2:  # Two children: left and right
             self.left, self.right = children
             for child in children:
                 child.parent = self
-        else: # More than two: binarize using auxiliary node(s)
+        else:  # More than two: binarize using auxiliary node(s)
             self.left = children[0]
             self.left.parent = self
-            aux = Node(self.label + '_' + children[1].label)
+            aux = Node(self.label + '_' + children[1].label)  # 'AUX')
             self.right = aux
             self.right.parent = self
             aux.set_children_binarized(children[1:])
-            
+
     def __str__(self):
         return self.label if self.word is None else self.word
-    
+
     def subtree_str(self):
         if self.isLeaf:
             return self.__str__()
         else:
-            return "(%s %s %s)"%(self.left.subtree_str(), self,
-                                 self.right.subtree_str())
+            return "(%s %s %s)" % (self.left.subtree_str(), self,
+                                   self.right.subtree_str())
+
 
 class Tree:
-
-    def __init__(self,f):
-        print("Reading %s..."%f)
+    def __init__(self, f):
+        print("Reading %s..." % f)
         passage = convert.from_standard(ET.parse(f).getroot())
         self.root = Node('ROOT')
         children = [self.build(x) for l in passage.layers
@@ -69,48 +70,54 @@ class Tree:
         children = [self.build(x) for x in ucca_node.children]
         node.set_children_binarized(children)
         return node
-    
+
     def __str__(self):
         return self.root.subtree_str()
 
-        
 
-def leftTraverse(root,nodeFn=None,args=None):
+def leftTraverse(root, nodeFn=None, args=None):
     """
     Recursive function traverses tree
     from left to right. 
     Calls nodeFn at each node
     """
-    nodeFn(root,args)
+    nodeFn(root, args)
     if root.left is not None:
-        leftTraverse(root.left,nodeFn,args)
+        leftTraverse(root.left, nodeFn, args)
     if root.right is not None:
-        leftTraverse(root.right,nodeFn,args)
+        leftTraverse(root.right, nodeFn, args)
 
-def countWords(node,words):
+
+def countWords(node, words):
     if node.isLeaf:
         words[node.word] += 1
 
-def countLabels(node,labels):
+
+def countLabels(node, labels):
     labels[node.label] += 1
 
-def mapWords(node,wordMap):
+
+def mapWords(node, wordMap):
     if node.isLeaf:
         if node.word not in wordMap:
             node.word = wordMap[UNK]
         else:
             node.word = wordMap[node.word]
 
-def mapLabels(node,labelMap):
+
+def mapLabels(node, labelMap):
     node.label = labelMap[node.label]
 
+
 def loadWordMap():
-    with open('wordMap.bin','rb') as fid:
+    with open('wordMap.bin', 'rb') as fid:
         return pickle.load(fid)
 
+
 def loadLabelMap():
-    with open('labelMap.bin','rb') as fid:
+    with open('labelMap.bin', 'rb') as fid:
         return pickle.load(fid)
+
 
 def buildWordMap(trees):
     """
@@ -120,42 +127,45 @@ def buildWordMap(trees):
     print("Counting words...")
     words = collections.defaultdict(int)
     for tree in trees:
-        leftTraverse(tree.root,nodeFn=countWords,args=words)
-    
-    wordMap = dict(list(zip(iter(words.keys()),list(range(len(words))))))
-    wordMap[UNK] = len(words) # Add unknown as word
+        leftTraverse(tree.root, nodeFn=countWords, args=words)
+
+    wordMap = dict(list(zip(iter(words.keys()), list(range(len(words))))))
+    wordMap[UNK] = len(words)  # Add unknown as word
 
     f = 'wordMap.bin'
-    with open(f,'wb') as fid:
-        pickle.dump(wordMap,fid)
-    print("Wrote '%s'"%f)
+    with open(f, 'wb') as fid:
+        pickle.dump(wordMap, fid)
+    print("Wrote '%s'" % f)
+
 
 def buildLabelMap(trees):
     print("Counting labels...")
     labels = collections.defaultdict(int)
     for tree in trees:
-        leftTraverse(tree.root,nodeFn=countLabels,args=labels)
-    
-    labelsMap = dict(list(zip(iter(labels.keys()),list(range(len(labels))))))
+        leftTraverse(tree.root, nodeFn=countLabels, args=labels)
+
+    labelsMap = dict(list(zip(iter(labels.keys()), list(range(len(labels))))))
 
     f = 'labelMap.bin'
-    with open(f,'wb') as fid:
-        pickle.dump(labelsMap,fid)
-    print("Wrote '%s'"%f)
-        
+    with open(f, 'wb') as fid:
+        pickle.dump(labelsMap, fid)
+    print("Wrote '%s'" % f)
+
+
 def loadTrees(dataSet='train'):
     """
     Loads trees. Maps leaf node words to word ids.
     """
-    with open('trees/%s.bin'%dataSet,'rb') as fid:
+    with open('trees/%s.bin' % dataSet, 'rb') as fid:
         trees = pickle.load(fid)
-        
+
     wordMap = loadWordMap()
     labelMap = loadLabelMap()
     for tree in trees:
-        leftTraverse(tree.root,nodeFn=mapWords,args=wordMap)
-        leftTraverse(tree.root,nodeFn=mapLabels,args=labelMap)
+        leftTraverse(tree.root, nodeFn=mapWords, args=wordMap)
+        leftTraverse(tree.root, nodeFn=mapLabels, args=labelMap)
     return trees
+
 
 def buildTrees():
     """
@@ -164,19 +174,20 @@ def buildTrees():
     trees = {}
     for dataSet in 'train', 'dev', 'test':
         passages = glob('passages/%s/*.xml' % dataSet)
-        print("Reading passages in %s..."%dataSet)
+        print("Reading passages in %s..." % dataSet)
         trees[dataSet] = [Tree(f) for f in passages]
-        
-        f = 'trees/%s.bin'%dataSet
-        with open(f,'wb') as fid:
-            pickle.dump(trees[dataSet],fid)
-        print("Wrote '%s'"%f)
-            
+
+        f = 'trees/%s.bin' % dataSet
+        with open(f, 'wb') as fid:
+            pickle.dump(trees[dataSet], fid)
+        print("Wrote '%s'" % f)
+
     buildWordMap(trees['train'])
     buildLabelMap(trees['train'])
     return trees
-      
-if __name__=='__main__':
+
+
+if __name__ == '__main__':
     buildTrees()
 
 
