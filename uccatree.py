@@ -22,7 +22,7 @@ class Node:
             self.isLeaf = True
         elif len(children) == 1:  # One child: cut off self
             child = children[0]
-            self.label = child.label
+            self.label = self.label + '_' + child.label
             self.word = child.word
             self.left = child.left
             self.right = child.right
@@ -52,12 +52,15 @@ class Node:
 
 class Tree:
     def __init__(self, f):
-        print("Reading %s..." % f)
-        passage = convert.from_standard(ET.parse(f).getroot())
-        self.root = Node('ROOT')
-        children = [self.build(x) for l in passage.layers
-                    for x in l.all if not x.incoming]
-        self.root.set_children_binarized(children)
+        if isinstance(f, Node):
+            self.root = f
+        else:
+            print("Reading %s..." % f)
+            passage = convert.from_standard(ET.parse(f).getroot())
+            self.root = Node('ROOT')
+            children = [self.build(x) for l in passage.layers
+                        for x in l.all if not x.incoming]
+            self.root.set_children_binarized(children)
 
     def build(self, ucca_node):
         """
@@ -154,7 +157,7 @@ def buildLabelMap(trees):
 
 def loadTrees(dataSet='train'):
     """
-    Loads trees. Maps leaf node words to word ids.
+    Loads trees. Maps leaf node words to word ids and all labels to label ids.
     """
     with open('trees/%s.bin' % dataSet, 'rb') as fid:
         trees = pickle.load(fid)
@@ -164,6 +167,18 @@ def loadTrees(dataSet='train'):
     for tree in trees:
         leftTraverse(tree.root, nodeFn=mapWords, args=wordMap)
         leftTraverse(tree.root, nodeFn=mapLabels, args=labelMap)
+    return trees
+
+
+def unmapTrees(trees):
+    """
+    Maps leaf node words ids back to words and label ids to labels.
+    """
+    reverseWordMap = {v: k for k, v in loadWordMap().items()}
+    reverseLabelMap = {v: k for k, v in loadLabelMap().items()}
+    for tree in trees:
+        leftTraverse(tree.root, nodeFn=mapWords, args=reverseWordMap)
+        leftTraverse(tree.root, nodeFn=mapLabels, args=reverseLabelMap)
     return trees
 
 

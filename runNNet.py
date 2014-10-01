@@ -70,8 +70,18 @@ def test(netFile, dataSet):
         rnn = nnet.RNN(opts.wvecDim, opts.outputDim, opts.numWords, opts.minibatch)
         rnn.fromFile(fid)
     print("Testing...")
-    cost, correct, total = rnn.costAndGrad(trees, test=True)
+    cost, correct, total, pred = rnn.costAndGrad(trees, test=True, retTrees=True)
     print("Cost %f, Correct %d/%d, Acc %f" % (cost, correct, total, correct / float(total)))
+    unmapTrees(trees)
+    unmapTrees(pred)
+    print()
+    print("Correct trees:")
+    for tree in trees:
+        print(tree)
+    print()
+    print("Predicted trees:")
+    for tree in pred:
+        print(tree)
 
 
 if __name__ == '__main__':
