@@ -78,7 +78,7 @@ class RNN:
         # scale cost and grad by mb size
         scale = (1. / self.mbSize)
         for v in self.dL.values():
-            v *= scale # FIXME
+            v *= scale
 
         # Add L2 Regularization 
         cost += (self.rho / 2) * np.sum(self.V ** 2)
