@@ -22,7 +22,7 @@ class Node:
             self.isLeaf = True
         elif len(children) == 1:  # One child: cut off self
             child = children[0]
-            self.label = self.label + '_' + child.label
+            self.label = self.label #+ '_' + child.label
             self.word = child.word
             self.left = child.left
             self.right = child.right
@@ -34,7 +34,7 @@ class Node:
         else:  # More than two: binarize using auxiliary node(s)
             self.left = children[0]
             self.left.parent = self
-            aux = Node(self.label + '_' + children[1].label)  # 'AUX')
+            aux = Node(children[1].label) # self.label + '_' +
             self.right = aux
             self.right.parent = self
             aux.set_children_binarized(children[1:])
@@ -66,16 +66,21 @@ class Tree:
         """
         Convert a UCCA node to a tree node along with its children
         """
+        label = getLabel(ucca_node)
         if ucca_node.layer.ID == layer0.LAYER_ID:
-            node = Node(ucca_node.tag, ucca_node.text)
+            node = Node(label, ucca_node.text)
         else:
-            node = Node(ucca_node.tag)
+            node = Node(label)
         children = [self.build(x) for x in ucca_node.children]
         node.set_children_binarized(children)
         return node
 
     def __str__(self):
         return self.root.subtree_str()
+
+
+def getLabel(ucca_node):
+    return ucca_node.incoming[0].tag if ucca_node.incoming else 'SCENE'
 
 
 def leftTraverse(root, nodeFn=None, args=None):
