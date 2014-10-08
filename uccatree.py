@@ -155,6 +155,24 @@ def buildLabelMap(trees):
     print("Wrote '%s'" % f)
 
 
+def loadWordVectors(wvecDim, wvecFile, wordMap):
+    import gzip
+    import numpy as np
+    numWords = len(wordMap)
+    L = 0.01 * np.random.randn(wvecDim, numWords)
+    f = gzip.open(wvecFile)
+    for line in f:
+        fields = line.split()
+        word = fields[0]
+        vec = fields[1:]
+        if len(vec) != wvecDim:
+            raise Exception("word vectors in %s must match wvecDim=%d" % (wvecFile, wvecDim))
+        index = wordMap.get(word, wordMap[UNK])
+        L[:, index] = vec
+    f.close()
+    return L
+
+
 def loadTrees(dataSet='train'):
     """
     Loads trees. Maps leaf node words to word ids and all labels to label ids.

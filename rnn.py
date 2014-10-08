@@ -3,7 +3,7 @@ import collections
 
 
 class RNN:
-    def __init__(self, wvecDim, outputDim, numWords, mbSize=30, rho=1e-4):
+    def __init__(self, wvecDim, outputDim, numWords, mbSize=30, wvecs=None, rho=1e-4):
         self.wvecDim = wvecDim
         self.outputDim = outputDim
         self.numWords = numWords
@@ -12,7 +12,8 @@ class RNN:
         self.rho = rho
 
         # Word vectors
-        self.L = 0.01 * np.random.randn(self.wvecDim, self.numWords)
+        self.L = 0.01 * np.random.randn(self.wvecDim, self.numWords) if wvecs is None \
+            else wvecs
 
         # Hidden activation weights
         self.W = 0.01 * np.random.randn(self.wvecDim, 2 * self.wvecDim)

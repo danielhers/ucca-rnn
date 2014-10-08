@@ -8,6 +8,8 @@ import time
 from uccatree import *
 
 
+
+
 def run(args=None):
     usage = "usage : %prog [options]"
     parser = optparse.OptionParser(usage=usage)
@@ -22,12 +24,13 @@ def run(args=None):
     parser.add_option("--step", dest="step", type="float", default=1e-2)
 
     parser.add_option("--outputDim", dest="outputDim", type="int", default=0)
-    parser.add_option("--wvecDim", dest="wvecDim", type="int", default=30)
+    parser.add_option("--wvecDim", dest="wvecDim", type="int", default=50)
     parser.add_option("--outFile", dest="outFile", type="string",
                       default="models/test.bin")
     parser.add_option("--inFile", dest="inFile", type="string",
                       default="models/test.bin")
     parser.add_option("--data", dest="data", type="string", default="train")
+    parser.add_option("--wvecFile", dest="wvecFile", type="string", default=None)
 
     (opts, args) = parser.parse_args(args)
 
@@ -39,11 +42,18 @@ def run(args=None):
     print("Loading data...")
     # load training data
     trees = loadTrees()
-    opts.numWords = len(loadWordMap())
+    wordMap = loadWordMap()
+    opts.numWords = len(wordMap)
     if opts.outputDim == 0:
         opts.outputDim = len(loadLabelMap())
 
-    rnn = nnet.RNN(opts.wvecDim, opts.outputDim, opts.numWords, opts.minibatch)
+    if opts.wvecFile is None:
+        wvecs = None
+    else:
+        print("Loading word vectors...")
+        wvecs = loadWordVectors(opts.wvecDim, opts.wvecFile, wordMap)
+
+    rnn = nnet.RNN(opts.wvecDim, opts.outputDim, opts.numWords, opts.minibatch, wvecs)
 
     sgd = optimizer.SGD(rnn, alpha=opts.step, minibatch=opts.minibatch,
                         optimizer=opts.optimizer)
