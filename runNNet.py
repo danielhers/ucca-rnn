@@ -82,16 +82,17 @@ def test(netFile, dataSet):
     print("Testing...")
     cost, correct, total, pred = rnn.costAndGrad(trees, test=True, retTrees=True)
     print("Cost %f, Correct %d/%d, Acc %f" % (cost, correct, total, correct / float(total)))
+
     unmapTrees(trees)
     unmapTrees(pred)
-    print()
-    print("Correct trees:")
-    for tree in trees:
-        print(tree)
-    print()
-    print("Predicted trees:")
-    for tree in pred:
-        print(tree)
+    printTrees('results/gold.txt', trees, 'Labeled')
+    printTrees('results/pred.txt', pred, 'Predicted')
+
+
+def printTrees(f, trees, desc):
+    with open(f, 'w', encoding='utf-8') as fid:
+        fid.write('\n'.join([str(tree) for tree in trees]))
+    print("%s trees printed to %s" % (desc, f))
 
 
 if __name__ == '__main__':
