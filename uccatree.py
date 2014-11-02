@@ -44,9 +44,10 @@ class Node:
 
     def subtree_str(self):
         if self.isLeaf:
-            return self.__str__()
+            return str(self)
         else:
-            return "(%s %s %s)" % (self.left.subtree_str(), self,
+            return "(%s %s %s)" % (self,
+                                   self.left.subtree_str(),
                                    self.right.subtree_str())
 
 
