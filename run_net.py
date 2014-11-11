@@ -70,8 +70,9 @@ def run(args=None):
 
 
 def test(net_file, data_set):
-    trees = load_trees(data_set)
     assert net_file is not None, "Must give model to test"
+    trees = load_trees(data_set)
+    assert trees, "No data found"
     with open(net_file, 'rb') as fid:
         opts = pickle.load(fid)
         _ = pickle.load(fid)

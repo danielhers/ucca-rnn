@@ -51,7 +51,6 @@ class RNN:
         cost = 0.0
         correct = 0.0
         total = 0.0
-
         trees = [] if ret_trees else None
 
         self.L, self.V, self.W, self.b, self.Ws, self.bs = self.stack
@@ -97,9 +96,7 @@ class RNN:
 
         if node.is_leaf:
             node.h_acts = self.L[:, node.word]
-            node.fprop = True
             left = right = None
-
         else:
             if not node.left.fprop:
                 c, corr, tot, left = self.forward_prop(node.left, ret_tree)
