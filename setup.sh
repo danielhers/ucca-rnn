@@ -14,4 +14,4 @@ rm -f $data
 python3 split.py
 
 # Convert to trees
-python3 uccatree.py
+python3 ucca_tree.py

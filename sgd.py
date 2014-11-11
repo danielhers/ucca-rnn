@@ -39,7 +39,7 @@ class SGD:
 
             mb_data = trees[i:i + self.minibatch]
 
-            cost, grad = self.model.costAndGrad(mb_data)
+            cost, grad = self.model.cost_and_grad(mb_data)
 
             # compute exponentially weighted cost
             if np.isfinite(cost):
@@ -70,7 +70,7 @@ class SGD:
 
 
             # update params
-            self.model.updateParams(scale, update, log=False)
+            self.model.update_params(scale, update, log=False)
 
             self.costt.append(cost)
             if self.it % 1 == 0:

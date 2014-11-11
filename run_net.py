@@ -5,9 +5,7 @@ import sgd as optimizer
 import rntn as nnet
 import time
 
-from uccatree import *
-
-
+from ucca_tree import *
 
 
 def run(args=None):
@@ -23,37 +21,37 @@ def run(args=None):
     parser.add_option("--epochs", dest="epochs", type="int", default=50)
     parser.add_option("--step", dest="step", type="float", default=1e-2)
 
-    parser.add_option("--outputDim", dest="outputDim", type="int", default=0)
-    parser.add_option("--wvecDim", dest="wvecDim", type="int", default=50)
-    parser.add_option("--outFile", dest="outFile", type="string",
+    parser.add_option("--output_dim", dest="output_dim", type="int", default=0)
+    parser.add_option("--wvec_dim", dest="wvec_dim", type="int", default=50)
+    parser.add_option("--out_file", dest="out_file", type="string",
                       default="models/test.bin")
-    parser.add_option("--inFile", dest="inFile", type="string",
+    parser.add_option("--in_file", dest="in_file", type="string",
                       default="models/test.bin")
     parser.add_option("--data", dest="data", type="string", default="train")
-    parser.add_option("--wvecFile", dest="wvecFile", type="string", default=None)
+    parser.add_option("--wvec_file", dest="wvec_file", type="string", default=None)
 
     (opts, args) = parser.parse_args(args)
 
     # Testing
     if opts.test:
-        test(opts.inFile, opts.data)
+        test(opts.in_file, opts.data)
         return
 
     print("Loading data...")
     # load training data
-    trees = loadTrees()
-    wordMap = loadWordMap()
-    opts.numWords = len(wordMap)
-    if opts.outputDim == 0:
-        opts.outputDim = len(loadLabelMap())
+    trees = load_trees()
+    word_map = load_word_map()
+    opts.num_words = len(word_map)
+    if opts.output_dim == 0:
+        opts.output_dim = len(load_label_map())
 
-    if opts.wvecFile is None:
+    if opts.wvec_file is None:
         wvecs = None
     else:
         print("Loading word vectors...")
-        wvecs = loadWordVectors(opts.wvecDim, opts.wvecFile, wordMap)
+        wvecs = load_word_vectors(opts.wvec_dim, opts.wvec_file, word_map)
 
-    rnn = nnet.RNN(opts.wvecDim, opts.outputDim, opts.numWords, opts.minibatch, wvecs)
+    rnn = nnet.RNN(opts.wvec_dim, opts.output_dim, opts.num_words, opts.minibatch, wvecs)
 
     sgd = optimizer.SGD(rnn, alpha=opts.step, minibatch=opts.minibatch,
                         optimizer=opts.optimizer)
@@ -65,34 +63,26 @@ def run(args=None):
         end = time.time()
         print("Time per epoch : %f" % (end - start))
 
-        with open(opts.outFile, 'wb') as fid:
+        with open(opts.out_file, 'wb') as fid:
             pickle.dump(opts, fid)
             pickle.dump(sgd.costt, fid)
-            rnn.toFile(fid)
+            rnn.to_file(fid)
 
 
-def test(netFile, dataSet):
-    trees = loadTrees(dataSet)
-    assert netFile is not None, "Must give model to test"
-    with open(netFile, 'rb') as fid:
+def test(net_file, data_set):
+    trees = load_trees(data_set)
+    assert net_file is not None, "Must give model to test"
+    with open(net_file, 'rb') as fid:
         opts = pickle.load(fid)
         _ = pickle.load(fid)
-        rnn = nnet.RNN(opts.wvecDim, opts.outputDim, opts.numWords, opts.minibatch)
-        rnn.fromFile(fid)
+        rnn = nnet.RNN(opts.wvec_dim, opts.output_dim, opts.num_words, opts.minibatch)
+        rnn.from_file(fid)
     print("Testing...")
-    cost, correct, total, pred = rnn.costAndGrad(trees, test=True, retTrees=True)
+    cost, correct, total, pred = rnn.cost_and_grad(trees, test=True, ret_trees=True)
     print("Cost %f, Correct %d/%d, Acc %f" % (cost, correct, total, correct / float(total)))
 
-    unmapTrees(trees)
-    unmapTrees(pred)
-    printTrees('results/gold.txt', trees, 'Labeled')
-    printTrees('results/pred.txt', pred, 'Predicted')
-
-
-def printTrees(f, trees, desc):
-    with open(f, 'w', encoding='utf-8') as fid:
-        fid.write('\n'.join([str(tree) for tree in trees]))
-    print("%s trees printed to %s" % (desc, f))
+    print_trees('results/gold.txt', trees, 'Labeled')
+    print_trees('results/pred.txt', pred, 'Predicted')
 
 
 if __name__ == '__main__':

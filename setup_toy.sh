@@ -12,4 +12,4 @@ cp toy.xml passages/dev/
 cp toy.xml passages/test/
 
 # Convert to trees
-python3 uccatree.py
+python3 ucca_tree.py

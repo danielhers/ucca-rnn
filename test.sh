@@ -9,4 +9,4 @@ infile=$1
 data=dev
 
 echo $infile
-python3 runNNet.py --inFile $infile --test --data $data
+python3 run_net.py --in_file $infile --test --data $data

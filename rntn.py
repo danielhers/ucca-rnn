@@ -1,42 +1,44 @@
 import numpy as np
 import collections
-from uccatree import Node, Tree
+from ucca_tree import Node, Tree
 
 np.seterr(over='raise', under='raise')
 
 
 class RNN:
-    def __init__(self, wvecDim, outputDim, numWords, mbSize=30, wvecs=None, rho=1e-6):
-        self.wvecDim = wvecDim
-        self.outputDim = outputDim
-        self.numWords = numWords
-        self.mbSize = mbSize
-        self.defaultVec = lambda: np.zeros((wvecDim,))
+    def __init__(self, wvec_dim, output_dim, num_words, mb_size=30, wvecs=None, rho=1e-6):
+        self.wvec_dim = wvec_dim
+        self.output_dim = output_dim
+        self.num_words = num_words
+        self.mb_size = mb_size
+        self.default_vec = lambda: np.zeros((wvec_dim,))
         self.rho = rho
 
         # Word vectors
-        self.L = 0.01 * np.random.randn(self.wvecDim, self.numWords) if wvecs is None \
-            else wvecs
+        if wvecs is not None:
+            self.L = wvecs
+        else:
+            self.L = 0.01 * np.random.randn(self.wvec_dim, self.num_words)
 
         # Hidden activation weights
-        self.V = 0.01 * np.random.randn(self.wvecDim, 2 * self.wvecDim, 2 * self.wvecDim)
-        self.W = 0.01 * np.random.randn(self.wvecDim, self.wvecDim * 2)
-        self.b = np.zeros((self.wvecDim))
+        self.V = 0.01 * np.random.randn(self.wvec_dim, 2 * self.wvec_dim, 2 * self.wvec_dim)
+        self.W = 0.01 * np.random.randn(self.wvec_dim, self.wvec_dim * 2)
+        self.b = np.zeros(self.wvec_dim)
 
         # Softmax weights
-        self.Ws = 0.01 * np.random.randn(self.outputDim, self.wvecDim)
-        self.bs = np.zeros((self.outputDim))
+        self.Ws = 0.01 * np.random.randn(self.output_dim, self.wvec_dim)
+        self.bs = np.zeros(self.output_dim)
 
         self.stack = [self.L, self.V, self.W, self.b, self.Ws, self.bs]
 
         # Gradients
-        self.dV = np.empty((self.wvecDim, 2 * self.wvecDim, 2 * self.wvecDim))
+        self.dV = np.empty((self.wvec_dim, 2 * self.wvec_dim, 2 * self.wvec_dim))
         self.dW = np.empty(self.W.shape)
-        self.db = np.empty((self.wvecDim))
+        self.db = np.empty(self.wvec_dim)
         self.dWs = np.empty(self.Ws.shape)
-        self.dbs = np.empty((self.outputDim))
+        self.dbs = np.empty(self.output_dim)
 
-    def costAndGrad(self, mbdata, test=False, retTrees=False):
+    def cost_and_grad(self, mb_data, test=False, ret_trees=False):
         """
         Each datum in the minibatch is a tree.
         Forward prop each tree.
@@ -50,7 +52,7 @@ class RNN:
         correct = 0.0
         total = 0.0
 
-        trees = [] if retTrees else None
+        trees = [] if ret_trees else None
 
         self.L, self.V, self.W, self.b, self.Ws, self.bs = self.stack
         # Zero gradients
@@ -59,25 +61,25 @@ class RNN:
         self.db[:] = 0
         self.dWs[:] = 0
         self.dbs[:] = 0
-        self.dL = collections.defaultdict(self.defaultVec)
+        self.dL = collections.defaultdict(self.default_vec)
 
         # Forward prop each tree in minibatch
-        for tree in mbdata:
-            c, corr, tot, pred = self.forwardProp(tree.root, retTree=retTrees)
+        for tree in mb_data:
+            c, corr, tot, pred = self.forward_prop(tree.root, ret_tree=ret_trees)
             cost += c
             correct += corr
             total += tot
-            if retTrees:
+            if ret_trees:
                 trees.append(Tree(pred))
         if test:
-            return (1. / len(mbdata)) * cost, correct, total, trees
+            return (1. / len(mb_data)) * cost, correct, total, trees
 
         # Back prop each tree in minibatch
-        for tree in mbdata:
-            self.backProp(tree.root)
+        for tree in mb_data:
+            self.back_prop(tree.root)
 
         # scale cost and grad by mb size
-        scale = (1. / self.mbSize)
+        scale = (1. / self.mb_size)
         for v in self.dL.values():
             v *= scale
 
@@ -90,45 +92,45 @@ class RNN:
                               scale * (self.dW + self.rho * self.W), scale * self.db,
                               scale * (self.dWs + self.rho * self.Ws), scale * self.dbs]
 
-    def forwardProp(self, node, retTree=False):
+    def forward_prop(self, node, ret_tree=False):
         cost = correct = total = 0.0
 
-        if node.isLeaf:
-            node.hActs = self.L[:, node.word]
+        if node.is_leaf:
+            node.h_acts = self.L[:, node.word]
             node.fprop = True
             left = right = None
 
         else:
             if not node.left.fprop:
-                c, corr, tot, left = self.forwardProp(node.left, retTree)
+                c, corr, tot, left = self.forward_prop(node.left, ret_tree)
                 cost += c
                 correct += corr
                 total += tot
             if not node.right.fprop:
-                c, corr, tot, right = self.forwardProp(node.right, retTree)
+                c, corr, tot, right = self.forward_prop(node.right, ret_tree)
                 cost += c
                 correct += corr
                 total += tot
             # Affine
-            lr = np.hstack([node.left.hActs, node.right.hActs])
-            node.hActs = np.dot(self.W, lr) + self.b
-            node.hActs += np.tensordot(self.V, np.outer(lr, lr), axes=([1, 2], [0, 1]))
+            lr = np.hstack([node.left.h_acts, node.right.h_acts])
+            node.h_acts = np.dot(self.W, lr) + self.b
+            node.h_acts += np.tensordot(self.V, np.outer(lr, lr), axes=([1, 2], [0, 1]))
             # Tanh
-            node.hActs = np.tanh(node.hActs)
+            node.h_acts = np.tanh(node.h_acts)
 
         # Softmax
-        node.probs = np.dot(self.Ws, node.hActs) + self.bs
+        node.probs = np.dot(self.Ws, node.h_acts) + self.bs
         node.probs -= np.max(node.probs)
         node.probs = np.exp(node.probs)
         node.probs /= np.sum(node.probs)
 
         node.fprop = True
 
-        if retTree:
+        if ret_tree:
             pred = Node(np.argmax(node.probs))
             pred.word = node.word
-            if node.isLeaf:
-                pred.isLeaf = True
+            if node.is_leaf:
+                pred.is_leaf = True
             else:
                 pred.left = left
                 pred.right = right
@@ -140,7 +142,7 @@ class RNN:
         return cost - np.log(node.probs[node.label]), correct + (np.argmax(node.probs) == node.label), total + 1, pred
 
 
-    def backProp(self, node, error=None):
+    def back_prop(self, node, error=None):
 
         # Clear nodes
         node.fprop = False
@@ -148,23 +150,23 @@ class RNN:
         # Softmax grad
         deltas = node.probs
         deltas[node.label] -= 1.0
-        self.dWs += np.outer(deltas, node.hActs)
+        self.dWs += np.outer(deltas, node.h_acts)
         self.dbs += deltas
         deltas = np.dot(self.Ws.T, deltas)
 
         if error is not None:
             deltas += error
 
-        deltas *= (1 - node.hActs ** 2)
+        deltas *= (1 - node.h_acts ** 2)
 
         # Leaf nodes update word vecs
-        if node.isLeaf:
+        if node.is_leaf:
             self.dL[node.word] += deltas
             return
 
         # Hidden grad
-        if not node.isLeaf:
-            lr = np.hstack([node.left.hActs, node.right.hActs])
+        if not node.is_leaf:
+            lr = np.hstack([node.left.h_acts, node.right.h_acts])
             outer = np.outer(deltas, lr)
             self.dV += (np.outer(lr, lr)[..., None] * deltas).T
             self.dW += outer
@@ -173,11 +175,11 @@ class RNN:
             deltas = np.dot(self.W.T, deltas)
             deltas += np.tensordot(self.V.transpose((0, 2, 1)) + self.V,
                                    outer.T, axes=([1, 0], [0, 1]))
-            self.backProp(node.left, deltas[:self.wvecDim])
-            self.backProp(node.right, deltas[self.wvecDim:])
+            self.back_prop(node.left, deltas[:self.wvec_dim])
+            self.back_prop(node.right, deltas[self.wvec_dim:])
 
 
-    def updateParams(self, scale, update, log=False):
+    def update_params(self, scale, update, log=False):
         """
         Updates parameters as
         p := p - scale * update.
@@ -186,9 +188,9 @@ class RNN:
         """
         if log:
             for P, dP in zip(self.stack[1:], update[1:]):
-                pRMS = np.sqrt(np.mean(P ** 2))
-                dpRMS = np.sqrt(np.mean((scale * dP) ** 2))
-                print("weight rms=%f -- update rms=%f" % (pRMS, dpRMS))
+                p_rms = np.sqrt(np.mean(P ** 2))
+                dp_rms = np.sqrt(np.mean((scale * dP) ** 2))
+                print("weight rms=%f -- update rms=%f" % (p_rms, dp_rms))
 
         self.stack[1:] = [P + scale * dP for P, dP in zip(self.stack[1:], update[1:])]
 
@@ -197,19 +199,17 @@ class RNN:
         for j in dL.keys():
             self.L[:, j] += scale * dL[j]
 
-    def toFile(self, fid):
+    def to_file(self, fid):
         import pickle as pickle
-
         pickle.dump(self.stack, fid)
 
-    def fromFile(self, fid):
+    def from_file(self, fid):
         import pickle as pickle
-
         self.stack = pickle.load(fid)
 
     def check_grad(self, data, epsilon=1e-6):
 
-        cost, grad = self.costAndGrad(data)
+        cost, grad = self.cost_and_grad(data)
 
         for W, dW in zip(self.stack[1:], grad[1:]):
             W = W[..., None, None]  # add dimension since bias is flat
@@ -218,11 +218,11 @@ class RNN:
                 for j in range(W.shape[1]):
                     for k in range(W.shape[2]):
                         W[i, j, k] += epsilon
-                        costP, _ = self.costAndGrad(data)
+                        cost_p, _ = self.cost_and_grad(data)
                         W[i, j, k] -= epsilon
-                        numGrad = (costP - cost) / epsilon
-                        err = np.abs(dW[i, j, k] - numGrad)
-                        print("Analytic %.9f, Numerical %.9f, Relative Error %.9f" % (dW[i, j, k], numGrad, err))
+                        num_grad = (cost_p - cost) / epsilon
+                        err = np.abs(dW[i, j, k] - num_grad)
+                        print("Analytic %.9f, Numerical %.9f, Relative Error %.9f" % (dW[i, j, k], num_grad, err))
 
         # check dL separately since dict
         dL = grad[0]
@@ -230,29 +230,25 @@ class RNN:
         for j in dL.keys():
             for i in range(L.shape[0]):
                 L[i, j] += epsilon
-                costP, _ = self.costAndGrad(data)
+                cost_p, _ = self.cost_and_grad(data)
                 L[i, j] -= epsilon
-                numGrad = (costP - cost) / epsilon
-                err = np.abs(dL[j][i] - numGrad)
-                print("Analytic %.9f, Numerical %.9f, Relative Error %.9f" % (dL[j][i], numGrad, err))
+                num_grad = (cost_p - cost) / epsilon
+                err = np.abs(dL[j][i] - num_grad)
+                print("Analytic %.9f, Numerical %.9f, Relative Error %.9f" % (dL[j][i], num_grad, err))
 
 
 if __name__ == '__main__':
-    import uccatree
+    import ucca_tree
 
-    train = uccatree.loadTrees()
-    numW = len(uccatree.loadWordMap())
-    outputDim = len(uccatree.loadLabelMap())
+    train = ucca_tree.load_trees()
+    numW = len(ucca_tree.load_word_map())
+    output_dim = len(ucca_tree.load_label_map())
+    wvec_dim = 10
 
-    wvecDim = 10
-
-    rntn = RNN(wvecDim, outputDim, numW, mbSize=4)
-
-    mbData = train[:1]
-    # cost, grad = rntn.costAndGrad(mbData)
+    rntn = RNN(wvec_dim, output_dim, numW, mb_size=4)
 
     print("Numerical gradient check...")
-    rntn.check_grad(mbData)
+    rntn.check_grad(train[:1])
 
 
 
