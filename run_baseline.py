@@ -9,6 +9,7 @@ def run(args=None):
     parser = optparse.OptionParser(usage=usage)
 
     parser.add_option("--test", action="store_true", dest="test", default=False)
+    parser.add_option("--output_dim", dest="output_dim", type="int", default=0)
     parser.add_option("--out_file", dest="out_file", type="string",
                       default="models/baseline.bin")
     parser.add_option("--in_file", dest="in_file", type="string",
@@ -25,8 +26,10 @@ def run(args=None):
     print("Loading data...")
     # load training data
     trees = load_trees()
+    if opts.output_dim == 0:
+        opts.output_dim = len(load_label_map())
 
-    baseline = Baseline()
+    baseline = Baseline(opts.output_dim)
     baseline.train(trees)
 
     with open(opts.out_file, 'wb') as fid:
@@ -40,7 +43,7 @@ def test(baseline_file, data_set):
     assert trees, "No data found"
     with open(baseline_file, 'rb') as fid:
         opts = pickle.load(fid)
-        baseline = Baseline()
+        baseline = Baseline(opts.output_dim)
         baseline.from_file(fid)
     print("Testing...")
     correct, total, pred = baseline.predict(trees)

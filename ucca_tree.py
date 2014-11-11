@@ -50,17 +50,22 @@ class Node:
                                    self.left.subtree_str(),
                                    self.right.subtree_str())
 
-    def left_traverse(self, node_fn=None, args=None):
+    def left_traverse(self, node_fn=None, args=None,
+                      args_root=None, args_leaf=None, is_root=False):
         """
         Recursive function traverses tree
         from left to right.
         Calls node_fn at each node
         """
-        node_fn(self, args)
+        if args_root is None:
+            args_root = args
+        if args_leaf is None:
+            args_leaf = args
+        node_fn(self, args_root if is_root else args_leaf if self.is_leaf else args)
         if self.left is not None:
-            self.left.left_traverse(node_fn, args)
+            self.left.left_traverse(node_fn, args, args_root, args_leaf)
         if self.right is not None:
-            self.right.left_traverse(node_fn, args)
+            self.right.left_traverse(node_fn, args, args_root, args_leaf)
 
 
 class Tree:
@@ -91,8 +96,8 @@ class Tree:
     def __str__(self):
         return self.root.subtree_str()
 
-    def left_traverse(self, node_fn=None, args=None):
-        self.root.left_traverse(node_fn, args)
+    def left_traverse(self, node_fn=None, args=None, args_root=None, args_leaf=None):
+        self.root.left_traverse(node_fn, args, args_root, args_leaf, is_root=True)
 
 
 def get_label(ucca_node):
