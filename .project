@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ucca-rntn</name>
+	<name>ucca-rnn</name>
 	<comment></comment>
 	<projects>
 		<project>ucca</project>
