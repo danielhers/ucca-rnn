@@ -105,7 +105,9 @@ class RNN:
             node.h_acts = np.dot(self.W,
                                 np.hstack([node.left.h_acts, node.right.h_acts])) + self.b
             # Relu
-            node.h_acts[node.h_acts < 0] = 0
+            # node.h_acts[node.h_acts < 0] = 0
+            # Tanh
+            node.h_acts = np.tanh(node.h_acts)
 
         # Softmax
         node.probs = np.dot(self.Ws, node.h_acts) + self.bs
@@ -146,7 +148,8 @@ class RNN:
         if error is not None:
             deltas += error
 
-        deltas *= (node.h_acts != 0)
+        # deltas *= (node.h_acts != 0)
+        deltas *= (1 - node.h_acts ** 2)
 
         # Leaf nodes update word vecs
         if node.is_leaf:
@@ -193,6 +196,7 @@ class RNN:
         self.stack = pickle.load(fid)
 
     def check_grad(self, data, epsilon=1e-6):
+
         cost, grad = self.cost_and_grad(data)
 
         for W, dW in zip(self.stack[1:], grad[1:]):
