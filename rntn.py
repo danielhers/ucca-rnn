@@ -48,9 +48,7 @@ class RNN:
            Gradient w.r.t. W, Ws, b, bs
            Gradient w.r.t. L in sparse form.
         """
-        cost = 0.0
-        correct = 0.0
-        total = 0.0
+        cost = correct = total = 0.0
         trees = [] if ret_trees else None
 
         self.L, self.V, self.W, self.b, self.Ws, self.bs = self.stack
@@ -238,11 +236,11 @@ if __name__ == '__main__':
     import ucca_tree
 
     train = ucca_tree.load_trees()
-    numW = len(ucca_tree.load_word_map())
+    num_words = len(ucca_tree.load_word_map())
     output_dim = len(ucca_tree.load_label_map())
     wvec_dim = 10
 
-    rntn = RNN(wvec_dim, output_dim, numW, mb_size=4)
+    rntn = RNN(wvec_dim, output_dim, num_words, mb_size=4)
 
     print("Numerical gradient check...")
     rntn.check_grad(train[:1])
