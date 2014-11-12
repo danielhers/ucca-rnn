@@ -1,8 +1,8 @@
 import optparse
 import pickle
+import importlib
 
 import sgd as optimizer
-import rntn as nnet
 import time
 
 from ucca_tree import *
@@ -18,6 +18,7 @@ def run(args=None):
     parser.add_option("--minibatch", dest="minibatch", type="int", default=30)
     parser.add_option("--optimizer", dest="optimizer", type="string",
                       default="adagrad")
+    parser.add_option("--model", dest="model", type="string", default="rntn")
     parser.add_option("--epochs", dest="epochs", type="int", default=50)
     parser.add_option("--step", dest="step", type="float", default=1e-2)
 
@@ -51,6 +52,7 @@ def run(args=None):
         print("Loading word vectors...")
         wvecs = load_word_vectors(opts.wvec_dim, opts.wvec_file, word_map)
 
+    nnet = importlib.import_module(opts.model)
     rnn = nnet.RNN(opts.wvec_dim, opts.output_dim, opts.num_words, opts.minibatch, wvecs)
 
     sgd = optimizer.SGD(rnn, alpha=opts.step, minibatch=opts.minibatch,
@@ -76,6 +78,10 @@ def test(net_file, data_set):
     with open(net_file, 'rb') as fid:
         opts = pickle.load(fid)
         _ = pickle.load(fid)
+        try:
+            nnet = importlib.import_module(opts.model)
+        except AttributeError:
+            import rntn as nnet
         rnn = nnet.RNN(opts.wvec_dim, opts.output_dim, opts.num_words, opts.minibatch)
         rnn.from_file(fid)
     print("Testing...")
