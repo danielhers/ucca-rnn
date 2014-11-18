@@ -148,8 +148,8 @@ class RNN:
         if error is not None:
             deltas += error
 
-        # deltas *= (node.h_acts != 0)
-        deltas *= (1 - node.h_acts ** 2)
+        deltas *= (node.h_acts != 0)
+        #deltas *= (1 - node.h_acts ** 2)
 
         # Leaf nodes update word vecs
         if node.is_leaf:
@@ -187,6 +187,11 @@ class RNN:
         for j in dL.keys():
             self.L[:, j] += scale * dL[j]
 
+    def nearest(word, k):
+        self.L, _, _, _, _ = self.stack
+        distances = self.L[:, word].dot(self.L)
+        return distances.argsort()[-k:][::-1]
+
     def to_file(self, fid):
         import pickle as pickle
         pickle.dump(self.stack, fid)
@@ -196,7 +201,6 @@ class RNN:
         self.stack = pickle.load(fid)
 
     def check_grad(self, data, epsilon=1e-6):
-
         cost, grad = self.cost_and_grad(data)
 
         for W, dW in zip(self.stack[1:], grad[1:]):
