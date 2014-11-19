@@ -13,6 +13,7 @@ def run(args=None):
     parser = optparse.OptionParser(usage=usage)
 
     parser.add_option("--test", action="store_true", dest="test", default=False)
+    parser.add_option("--distance", action="store_true", dest="distance", default=False)
 
     # Optimizer
     parser.add_option("--minibatch", dest="minibatch", type="int", default=30)
@@ -36,6 +37,11 @@ def run(args=None):
     # Testing
     if opts.test:
         test(opts.in_file, opts.data)
+        return
+
+    # Finding nearest neighbors to input words
+    if opts.distance:
+        distance(opts.in_file)
         return
 
     print("Loading data...")
@@ -72,9 +78,35 @@ def run(args=None):
 
 
 def test(net_file, data_set):
-    assert net_file is not None, "Must give model to test"
     trees = load_trees(data_set)
     assert trees, "No data found"
+    rnn = load_nnet(net_file)
+    print("Testing...")
+    cost, correct, total, pred = rnn.cost_and_grad(trees, test=True, ret_trees=True)
+    print("Cost %f, Correct %d/%d, Acc %f" % (cost, correct, total, correct / float(total)))
+
+    print_trees('results/gold.txt', trees, 'Labeled')
+    print_trees('results/pred.txt', pred, 'Predicted')
+
+
+def distance(net_file):
+    rnn = load_nnet(net_file)
+    word_map = load_word_map()
+    inverted = invert_map(word_map)
+    k = 10
+    while True:
+        try:
+            word = str(input("Enter word: "))
+        except EOFError: break
+        index = word_map.get(word) or word_map.get(UNK)
+        neighbors = rnn.nearest(index, k)
+        neighbors = [inverted[index] for index in neighbors]
+        print('\n'.join(neighbors))
+    print()
+
+
+def load_nnet(net_file):
+    assert net_file is not None, "Must give model to test"
     with open(net_file, 'rb') as fid:
         opts = pickle.load(fid)
         _ = pickle.load(fid)
@@ -84,15 +116,8 @@ def test(net_file, data_set):
             import rnn as nnet
         rnn = nnet.RNN(opts.wvec_dim, opts.output_dim, opts.num_words, opts.minibatch)
         rnn.from_file(fid)
-    print("Testing...")
-    cost, correct, total, pred = rnn.cost_and_grad(trees, test=True, ret_trees=True)
-    print("Cost %f, Correct %d/%d, Acc %f" % (cost, correct, total, correct / float(total)))
-
-    print_trees('results/gold.txt', trees, 'Labeled')
-    print_trees('results/pred.txt', pred, 'Predicted')
+    return rnn
 
 
 if __name__ == '__main__':
     run()
-
-
