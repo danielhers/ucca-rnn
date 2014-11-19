@@ -13,5 +13,8 @@ export PYTHONPATH=${PYTHONPATH}:../ucca
 infile=$1
 data=dev
 
-echo $infile
-python3 run_net.py --in_file $infile --test --data $data
+if [ `basename $infile` == "baseline.bin" ]; then
+  python3 run_baseline.py --in_file $infile --test
+else
+  python3 run_net.py --in_file $infile --test --data $data
+fi
