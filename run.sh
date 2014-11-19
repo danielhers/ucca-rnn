@@ -10,7 +10,7 @@ export PYTHONPATH=$DIR/../ucca
 epochs=40
 step=1e-1
 wvec_dim=50
-wvec_file="/cs/cgrad/danielh/nlp/danielh/workspace/glove/glove.6B.50d.txt.gz"
+wvec_file="../glove/glove.6B.50d.txt.gz"
 
 outfile="models/rntn_wvec_dim_${wvec_dim}_step_${step}_2.bin"
 
