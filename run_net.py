@@ -81,7 +81,7 @@ def test(net_file, data_set):
         try:
             nnet = importlib.import_module(opts.model)
         except AttributeError:
-            import rntn as nnet
+            import rnn as nnet
         rnn = nnet.RNN(opts.wvec_dim, opts.output_dim, opts.num_words, opts.minibatch)
         rnn.from_file(fid)
     print("Testing...")
