@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 models/<filename>"
+  exit
+fi
+
 # verbose
 set -x
 
