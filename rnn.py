@@ -187,10 +187,10 @@ class RNN:
         for j in dL.keys():
             self.L[:, j] += scale * dL[j]
 
-    def nearest(word, k):
+    def nearest(self, word, k):
         self.L, _, _, _, _ = self.stack
         distances = self.L[:, word].dot(self.L)
-        return distances.argsort()[-k:][::-1]
+        return distances.argsort()[-k-1:-1][::-1]
 
     def to_file(self, fid):
         import pickle as pickle

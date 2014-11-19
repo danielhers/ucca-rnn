@@ -95,11 +95,14 @@ def distance(net_file):
     inverted = invert_map(word_map)
     k = 10
     while True:
-        word = str(input("Enter word: "))
-        if not word: return
-        neighbors = rnn.nearest(word_map(word), k)
-        neighbors = [inverted(word) for word in neighbors]
+        try:
+            word = str(input("Enter word: "))
+        except EOFError: break
+        index = word_map.get(word) or word_map.get(UNK)
+        neighbors = rnn.nearest(index, k)
+        neighbors = [inverted[index] for index in neighbors]
         print('\n'.join(neighbors))
+    print()
 
 
 def load_nnet(net_file):
