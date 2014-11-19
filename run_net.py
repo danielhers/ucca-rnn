@@ -95,7 +95,7 @@ def distance(net_file):
     inverted = invert_map(word_map)
     k = 10
     while True:
-        word = str(raw_input("Enter word: "))
+        word = str(input("Enter word: "))
         if not word: return
         neighbors = rnn.nearest(word_map(word), k)
         neighbors = [inverted(word) for word in neighbors]
