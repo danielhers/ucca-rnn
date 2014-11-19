@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir -p passages trees models
+mkdir -p passages trees models results
 
 export PYTHONPATH=${PYTHONPATH}:../ucca
 
