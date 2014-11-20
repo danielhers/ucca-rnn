@@ -115,7 +115,7 @@ def load_nnet(net_file):
     with open(net_file, 'rb') as fid:
         opts = pickle.load(fid)
         _ = pickle.load(fid)
-        model = models[getattr(opts, "model", "rnn")]
+        model = models[getattr(opts, "model", net_file.split("/")[-1].partition("_")[0])]
         net = model(opts.wvec_dim, opts.output_dim, opts.num_words, opts.minibatch)
         net.from_file(fid)
     return net
