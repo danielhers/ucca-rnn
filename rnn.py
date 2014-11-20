@@ -189,8 +189,9 @@ class RNN:
 
     def nearest(self, word, k):
         self.L, _, _, _, _ = self.stack
-        distances = self.L[:, word].dot(self.L)
-        return distances.argsort()[-k-1:-1][::-1]
+        distances = np.sqrt(((self.L.T - self.L[:, word])**2).sum(axis=1))
+        neighbors = distances.argsort()[1:k+1]
+        return (neighbors, distances[neighbors])
 
     def to_file(self, fid):
         import pickle as pickle

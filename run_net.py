@@ -99,9 +99,9 @@ def distance(net_file):
             word = str(input("Enter word: "))
         except EOFError: break
         index = word_map.get(word) or word_map.get(UNK)
-        neighbors = rnn.nearest(index, k)
+        neighbors, distances = rnn.nearest(index, k)
         neighbors = [inverted[index] for index in neighbors]
-        print('\n'.join(neighbors))
+        print("\n".join("%-30s%.5f" % (n, d) for n, d in zip(neighbors, distances)))
     print()
 
 
