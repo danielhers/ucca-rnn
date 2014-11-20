@@ -1,11 +1,12 @@
 import numpy as np
 import collections
 from ucca_tree import Node, Tree
+from rnn import RNN
 
 np.seterr(over='raise', under='raise')
 
 
-class RNTN:
+class RNTN (RNN):
     def __init__(self, wvec_dim, output_dim, num_words, mb_size=30, wvecs=None, rho=1e-6):
         self.wvec_dim = wvec_dim
         self.output_dim = output_dim
@@ -174,34 +175,6 @@ class RNTN:
             self.back_prop(node.right, deltas[self.wvec_dim:])
 
 
-    def update_params(self, scale, update, log=False):
-        """
-        Updates parameters as
-        p := p - scale * update.
-        If log is true, prints root mean square of parameter
-        and update.
-        """
-        if log:
-            for P, dP in zip(self.stack[1:], update[1:]):
-                p_rms = np.sqrt(np.mean(P ** 2))
-                dp_rms = np.sqrt(np.mean((scale * dP) ** 2))
-                print("weight rms=%f -- update rms=%f" % (p_rms, dp_rms))
-
-        self.stack[1:] = [P + scale * dP for P, dP in zip(self.stack[1:], update[1:])]
-
-        # handle dictionary update sparsely
-        dL = update[0]
-        for j in dL.keys():
-            self.L[:, j] += scale * dL[j]
-
-    def to_file(self, fid):
-        import pickle as pickle
-        pickle.dump(self.stack, fid)
-
-    def from_file(self, fid):
-        import pickle as pickle
-        self.stack = pickle.load(fid)
-
     def check_grad(self, data, epsilon=1e-6):
 
         cost, grad = self.cost_and_grad(data)
@@ -244,9 +217,3 @@ if __name__ == '__main__':
 
     print("Numerical gradient check...")
     rntn.check_grad(train[:1])
-
-
-
-
-
-

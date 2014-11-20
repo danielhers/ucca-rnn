@@ -5,7 +5,7 @@ from ucca_tree import Node, Tree
 np.seterr(over='raise', under='raise')
 
 
-class RNN:
+class RNN (object):
     def __init__(self, wvec_dim, output_dim, num_words, mb_size=30, wvecs=None, rho=1e-4):
         self.wvec_dim = wvec_dim
         self.output_dim = output_dim
@@ -187,12 +187,6 @@ class RNN:
         for j in dL.keys():
             self.L[:, j] += scale * dL[j]
 
-    def nearest(self, word, k):
-        self.L, _, _, _, _ = self.stack
-        distances = np.sqrt(((self.L.T - self.L[:, word])**2).sum(axis=1))
-        neighbors = distances.argsort()[1:k+1]
-        return (neighbors, distances[neighbors])
-
     def to_file(self, fid):
         import pickle as pickle
         pickle.dump(self.stack, fid)
@@ -228,6 +222,12 @@ class RNN:
                 err = np.abs(dL[j][i] - num_grad)
                 print("Analytic %.9f, Numerical %.9f, Relative Error %.9f" % (dL[j][i], num_grad, err))
 
+    def nearest(self, word, k):
+        self.L, _, _, _, _ = self.stack
+        distances = np.sqrt(((self.L.T - self.L[:, word])**2).sum(axis=1))
+        neighbors = distances.argsort()[1:k+1]
+        return (neighbors, distances[neighbors])
+
 
 if __name__ == '__main__':
     import ucca_tree
@@ -241,9 +241,3 @@ if __name__ == '__main__':
 
     print("Numerical gradient check...")
     rnn.check_grad(train[:4])
-
-
-
-
-
-
