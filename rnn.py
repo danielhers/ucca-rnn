@@ -223,7 +223,7 @@ class RNN (object):
                 print("Analytic %.9f, Numerical %.9f, Relative Error %.9f" % (dL[j][i], num_grad, err))
 
     def nearest(self, word, k):
-        self.L, _, _, _, _ = self.stack
+        self.L = self.stack[0]
         distances = np.sqrt(((self.L.T - self.L[:, word])**2).sum(axis=1))
         neighbors = distances.argsort()[1:k+1]
         return (neighbors, distances[neighbors])
