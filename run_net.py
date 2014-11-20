@@ -6,6 +6,11 @@ import sgd as optimizer
 import time
 
 from ucca_tree import *
+import rnn
+import rntn
+
+
+models = {"rnn": rnn.RNN, "rntn": rntn.RNTN}
 
 
 def run(args=None):
@@ -19,7 +24,7 @@ def run(args=None):
     parser.add_option("--minibatch", dest="minibatch", type="int", default=30)
     parser.add_option("--optimizer", dest="optimizer", type="string",
                       default="adagrad")
-    parser.add_option("--model", dest="model", type="string", default="rntn")
+    parser.add_option("--model", dest="model", type="string", default="rnn")
     parser.add_option("--epochs", dest="epochs", type="int", default=50)
     parser.add_option("--step", dest="step", type="float", default=1e-2)
 
@@ -58,10 +63,10 @@ def run(args=None):
         print("Loading word vectors...")
         wvecs = load_word_vectors(opts.wvec_dim, opts.wvec_file, word_map)
 
-    nnet = importlib.import_module(opts.model)
-    rnn = nnet.RNN(opts.wvec_dim, opts.output_dim, opts.num_words, opts.minibatch, wvecs)
+    model = models[opts.model]
+    net = model(opts.wvec_dim, opts.output_dim, opts.num_words, opts.minibatch, wvecs)
 
-    sgd = optimizer.SGD(rnn, alpha=opts.step, minibatch=opts.minibatch,
+    sgd = optimizer.SGD(net, alpha=opts.step, minibatch=opts.minibatch,
                         optimizer=opts.optimizer)
 
     for e in range(opts.epochs):
@@ -74,15 +79,15 @@ def run(args=None):
         with open(opts.out_file, 'wb') as fid:
             pickle.dump(opts, fid)
             pickle.dump(sgd.costt, fid)
-            rnn.to_file(fid)
+            net.to_file(fid)
 
 
 def test(net_file, data_set):
     trees = load_trees(data_set)
     assert trees, "No data found"
-    rnn = load_nnet(net_file)
+    net = load_nnet(net_file)
     print("Testing...")
-    cost, correct, total, pred = rnn.cost_and_grad(trees, test=True, ret_trees=True)
+    cost, correct, total, pred = net.cost_and_grad(trees, test=True, ret_trees=True)
     print("Cost %f, Correct %d/%d, Acc %f" % (cost, correct, total, correct / float(total)))
 
     print_trees('results/gold.txt', trees, 'Labeled')
@@ -90,7 +95,7 @@ def test(net_file, data_set):
 
 
 def distance(net_file):
-    rnn = load_nnet(net_file)
+    net = load_nnet(net_file)
     word_map = load_word_map()
     inverted = invert_map(word_map)
     k = 10
@@ -99,7 +104,7 @@ def distance(net_file):
             word = str(input("Enter word: "))
         except EOFError: break
         index = word_map.get(word) or word_map.get(UNK)
-        neighbors, distances = rnn.nearest(index, k)
+        neighbors, distances = net.nearest(index, k)
         neighbors = [inverted[index] for index in neighbors]
         print("\n".join("%-30s%.5f" % (n, d) for n, d in zip(neighbors, distances)))
     print()
@@ -110,13 +115,10 @@ def load_nnet(net_file):
     with open(net_file, 'rb') as fid:
         opts = pickle.load(fid)
         _ = pickle.load(fid)
-        try:
-            nnet = importlib.import_module(opts.model)
-        except AttributeError:
-            import rnn as nnet
-        rnn = nnet.RNN(opts.wvec_dim, opts.output_dim, opts.num_words, opts.minibatch)
-        rnn.from_file(fid)
-    return rnn
+        model = models[getattr(opts, "model", "rnn")]
+        net = model(opts.wvec_dim, opts.output_dim, opts.num_words, opts.minibatch)
+        net.from_file(fid)
+    return net
 
 
 if __name__ == '__main__':

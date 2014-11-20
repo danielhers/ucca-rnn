@@ -5,7 +5,7 @@ from ucca_tree import Node, Tree
 np.seterr(over='raise', under='raise')
 
 
-class RNN:
+class RNTN:
     def __init__(self, wvec_dim, output_dim, num_words, mb_size=30, wvecs=None, rho=1e-6):
         self.wvec_dim = wvec_dim
         self.output_dim = output_dim
@@ -240,7 +240,7 @@ if __name__ == '__main__':
     output_dim = len(ucca_tree.load_label_map())
     wvec_dim = 10
 
-    rntn = RNN(wvec_dim, output_dim, num_words, mb_size=4)
+    rntn = RNTN(wvec_dim, output_dim, num_words, mb_size=4)
 
     print("Numerical gradient check...")
     rntn.check_grad(train[:1])

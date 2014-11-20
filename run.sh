@@ -12,7 +12,7 @@ step=1e-1
 wvec_dim=50
 wvec_file="../glove/glove.6B.50d.txt.gz"
 
-outfile="models/rntn_wvec_dim_${wvec_dim}_step_${step}_2.bin"
+outfile="models/rnn_wvec_dim_${wvec_dim}_step_${step}_2.bin"
 
 echo $outfile
 python3 run_net.py --step $step --epochs $epochs --out_file $outfile \
