@@ -223,9 +223,9 @@ class RNN (object):
                 err = np.abs(dL[j][i] - num_grad)
                 print("Analytic %.9f, Numerical %.9f, Relative Error %.9f" % (dL[j][i], num_grad, err))
 
-    def nearest(self, word, k):
+    def nearest(self, word, k=10, metric='cosine'):
         self.L = self.stack[0]
-        distances = cdist(self.L.T, self.L[np.newaxis, :, word], 'cosine').reshape(-1)
+        distances = cdist(self.L.T, self.L[np.newaxis, :, word], metric).reshape(-1)
         neighbors = distances.argsort()[1:k+1]
         return neighbors, distances[neighbors]
 

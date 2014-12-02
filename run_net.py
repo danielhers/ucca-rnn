@@ -19,6 +19,7 @@ def run(args=None):
 
     parser.add_option("--test", action="store_true", dest="test", default=False)
     parser.add_option("--distance", action="store_true", dest="distance", default=False)
+    parser.add_option("--metric", dest="metric", default="cosine")
 
     # Optimizer
     parser.add_option("--minibatch", dest="minibatch", type="int", default=30)
@@ -46,7 +47,7 @@ def run(args=None):
 
     # Finding nearest neighbors to input words
     if opts.distance:
-        distance(opts.in_file)
+        distance(opts.in_file, opts.metric)
         return
 
     print("Loading data...")
@@ -68,6 +69,7 @@ def run(args=None):
 
     sgd = optimizer.SGD(net, alpha=opts.step, minibatch=opts.minibatch,
                         optimizer=opts.optimizer)
+    save(net, opts, sgd)
 
     for e in range(opts.epochs):
         start = time.time()
@@ -75,17 +77,20 @@ def run(args=None):
         sgd.run(trees)
         end = time.time()
         print("Time per epoch : %f" % (end - start))
+        save(net, opts, sgd)
 
-        with open(opts.out_file, 'wb') as fid:
-            pickle.dump(opts, fid)
-            pickle.dump(sgd.costt, fid)
-            net.to_file(fid)
+
+def save(net, opts, sgd):
+    with open(opts.out_file, 'wb') as fid:
+        pickle.dump(opts, fid)
+        pickle.dump(sgd.costt, fid)
+        net.to_file(fid)
 
 
 def test(net_file, data_set):
     trees = load_trees(data_set)
     assert trees, "No data found"
-    net = load_nnet(net_file)
+    net = load(net_file)
     print("Testing...")
     cost, correct, total, pred = net.cost_and_grad(trees, test=True, ret_trees=True)
     print("Cost %f, Correct %d/%d, Acc %f" % (cost, correct, total, correct / float(total)))
@@ -94,8 +99,8 @@ def test(net_file, data_set):
     print_trees('results/pred.txt', pred, 'Predicted')
 
 
-def distance(net_file):
-    net = load_nnet(net_file)
+def distance(net_file, metric):
+    net = load(net_file)
     word_map = load_word_map()
     inverted = invert_map(word_map)
     k = 10
@@ -104,13 +109,13 @@ def distance(net_file):
             word = str(input("Enter word: "))
         except EOFError: break
         index = word_map.get(word) or word_map.get(UNK)
-        neighbors, distances = net.nearest(index, k)
+        neighbors, distances = net.nearest(index, k, metric)
         neighbors = [inverted[index] for index in neighbors]
         print("\n".join("%-30s%.5f" % (n, d) for n, d in zip(neighbors, distances)))
     print()
 
 
-def load_nnet(net_file):
+def load(net_file):
     assert net_file is not None, "Must give model to test"
     with open(net_file, 'rb') as fid:
         opts = pickle.load(fid)
