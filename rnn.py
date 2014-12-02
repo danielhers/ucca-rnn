@@ -1,5 +1,6 @@
 import numpy as np
 import collections
+from scipy.spatial.distance import cdist
 from ucca_tree import Node, Tree
 
 np.seterr(over='raise', under='raise')
@@ -224,9 +225,9 @@ class RNN (object):
 
     def nearest(self, word, k):
         self.L = self.stack[0]
-        distances = np.sqrt(((self.L.T - self.L[:, word])**2).sum(axis=1))
+        distances = cdist(self.L.T, self.L[np.newaxis, :, word], 'cosine').reshape(-1)
         neighbors = distances.argsort()[1:k+1]
-        return (neighbors, distances[neighbors])
+        return neighbors, distances[neighbors]
 
 
 if __name__ == '__main__':
