@@ -1,7 +1,11 @@
 import collections
 import pickle
 import xml.etree.ElementTree as ET
+import gzip
+import numpy as np
 from glob import glob
+from io import TextIOWrapper
+import sys
 from ucca import convert, layer0
 
 UNK = 'UNK'
@@ -73,7 +77,7 @@ class Tree:
         if isinstance(f, Node):
             self.root = f
         else:
-            print("Reading %s..." % f)
+            print("Reading '%s'..." % f)
             passage = convert.from_standard(ET.parse(f).getroot())
             self.root = Node('ROOT')
             children = [self.build(x) for l in passage.layers
@@ -132,15 +136,20 @@ def load_label_map():
         return pickle.load(fid)
 
 
-def build_word_map(trees):
+def build_word_map(trees, extra_words=None):
     """
     Builds map of all words in training set
     to integer values.
+    If a word vector file is given, map these too
     """
     print("Counting words...")
     words = collections.defaultdict(int)
     for tree in trees:
         tree.left_traverse(node_fn=count_words, args=words)
+
+    if extra_words is not None:
+        for word in extra_words:
+            words[word] += 1
 
     word_map = dict(list(zip(iter(words.keys()), list(range(len(words))))))
     word_map[UNK] = len(words)  # Add unknown as word
@@ -166,20 +175,17 @@ def build_label_map(trees):
 
 
 def load_word_vectors(wvec_dim, wvec_file, word_map):
-    import gzip
-    import numpy as np
     num_words = len(word_map)
     L = 0.01 * np.random.randn(wvec_dim, num_words)
-    f = gzip.open(wvec_file)
-    for line in f:
-        fields = line.split()
-        word = fields[0]
-        vec = fields[1:]
-        if len(vec) != wvec_dim:
-            raise Exception("word vectors in %s must match wvec_dim=%d" % (wvec_file, wvec_dim))
-        index = word_map.get(word, word_map[UNK])
-        L[:, index] = vec
-    f.close()
+    with TextIOWrapper(gzip.open(wvec_file)) as f:
+        for line in f:
+            fields = line.split()
+            word = fields[0]
+            vec = fields[1:]
+            if len(vec) != wvec_dim:
+                raise Exception("word vectors in %s must match wvec_dim=%d" % (wvec_file, wvec_dim))
+            index = word_map.get(word, word_map[UNK])
+            L[:, index] = vec
     return L
 
 
@@ -218,14 +224,14 @@ def invert_map(d):
     return {v: k for k, v in d.items()}
 
 
-def build_trees():
+def build_trees(wvec_file=None):
     """
     Loads passages and convert to trees.
     """
     trees = {}
     for data_set in 'train', 'dev', 'test':
         passages = glob('passages/%s/*.xml' % data_set)
-        print("Reading passages in %s..." % data_set)
+        print("Reading passages in '%s'..." % data_set)
         trees[data_set] = [Tree(f) for f in passages]
 
         f = 'trees/%s.bin' % data_set
@@ -233,10 +239,20 @@ def build_trees():
             pickle.dump(trees[data_set], fid)
         print("Wrote '%s'" % f)
 
-    build_word_map(trees['train'])
+    all_trees = [tree for t in trees.values() for tree in t]
+
+    if wvec_file is not None:
+        print("Loading words from '%s'..." % wvec_file)
+        with TextIOWrapper(gzip.open(wvec_file)) as f:
+            extra_words = [line.split()[0] for line in f]
+
+    build_word_map(all_trees, extra_words)
     build_label_map(trees['train'])
     return trees
 
 
 if __name__ == '__main__':
-    build_trees()
+    if len(sys.argv) > 1:
+        build_trees(sys.argv[1])
+    else:
+        build_trees()
