@@ -11,7 +11,11 @@ set -x
 export PYTHONPATH=${PYTHONPATH}:../ucca
 
 infile=$1
-metric=$2
+if [ $# -gt 1 ]; then
+    metric=$2
+else
+    metric="cosine"
+fi
 data=dev
 
 python3 run_net.py --in_file $infile --distance --metric $metric
