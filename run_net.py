@@ -1,6 +1,5 @@
 import optparse
 import pickle
-import importlib
 
 import sgd as optimizer
 import time
@@ -92,7 +91,7 @@ def test(net_file, data_set):
     assert trees, "No data found"
     net = load(net_file)
     print("Testing...")
-    cost, correct, total, pred = net.cost_and_grad(trees, test=True, ret_trees=True)
+    cost, correct, total, pred = net.cost_and_grad(trees, test=True)
     print("Cost %f, Correct %d/%d, Acc %f" % (cost, correct, total, correct / float(total)))
 
     print_trees('results/gold.txt', trees, 'Labeled')

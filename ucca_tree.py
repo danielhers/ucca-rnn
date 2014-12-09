@@ -245,6 +245,8 @@ def build_trees(wvec_file=None):
         print("Loading words from '%s'..." % wvec_file)
         with TextIOWrapper(gzip.open(wvec_file)) as f:
             extra_words = [line.split()[0] for line in f]
+    else:
+        extra_words = None
 
     build_word_map(all_trees, extra_words)
     build_label_map(trees['train'])
