@@ -68,8 +68,16 @@ def test(netFile,dataSet):
         rnn.initParams()
         rnn.fromFile(fid)
     print "Testing..."
-    cost,correct,total = rnn.costAndGrad(trees,test=True)
-    print "Cost %f, Correct %d/%d, Acc %f"%(cost,correct,total,correct/float(total))
+    cost,correct,total,pred = rnn.costAndGrad(trees,test=True)
+    tr.unmapTrees(pred)
+
+    id2label = {}
+    for tree in pred:
+      tree.putIdsAndLabels(id2label)
+    with open("predictions.csv", "w") as fid:
+      fid.write("PhraseId,Sentiment\n")
+      for id, label in sorted(id2label.iteritems()):
+        fid.write("%d,%d\n" % (id, label))
 
 
 if __name__=='__main__':

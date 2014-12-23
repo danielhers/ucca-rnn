@@ -1,5 +1,6 @@
 import numpy as np
 import collections
+from tree import Node, Tree
 np.seterr(over='raise',under='raise')
 
 class RNN:
@@ -48,6 +49,7 @@ class RNN:
         cost = 0.0
         correct = 0.0
         total = 0.0
+        trees = []
 
         self.L,self.V,self.W,self.b,self.Ws,self.bs = self.stack
         # Zero gradients
@@ -60,12 +62,13 @@ class RNN:
 
         # Forward prop each tree in minibatch
         for tree in mbdata:
-            c,corr,tot = self.forwardProp(tree.root)
+            c,corr,tot,pred = self.forwardProp(tree.root, test)
             cost += c
             correct += corr
             total += tot
+            if test: trees.append(Tree(pred))
         if test:
-            return (1./len(mbdata))*cost,correct,total
+            return (1./len(mbdata))*cost,correct,total,trees
 
         # Back prop each tree in minibatch
         for tree in mbdata:
@@ -85,7 +88,7 @@ class RNN:
                            scale*(self.dW + self.rho*self.W),scale*self.db,
                            scale*(self.dWs+self.rho*self.Ws),scale*self.dbs]
 
-    def forwardProp(self,node):
+    def forwardProp(self,node,test=False):
         cost = correct =  total = 0.0
 
         if node.isLeaf:
@@ -94,12 +97,12 @@ class RNN:
 
         else:
             if not node.left.fprop: 
-                c,corr,tot = self.forwardProp(node.left)
+                c,corr,tot,left = self.forwardProp(node.left, test)
                 cost += c
                 correct += corr
                 total += tot
             if not node.right.fprop:
-                c,corr,tot = self.forwardProp(node.right)
+                c,corr,tot,right = self.forwardProp(node.right, test)
                 cost += c
                 correct += corr
                 total += tot
@@ -118,7 +121,20 @@ class RNN:
 
         node.fprop = True
 
-        return cost - np.log(node.probs[node.label]), correct + (np.argmax(node.probs)==node.label),total + 1
+        if test:
+            pred = Node(node.id, np.argmax(node.probs))
+            pred.word = node.word
+            if node.isLeaf:
+                pred.isLeaf = True
+            else:
+                pred.left = left
+                pred.right = right
+                left.parent = pred
+                right.parent = pred
+        else:
+            pred = None
+
+        return cost - np.log(node.probs[node.label]), correct + (np.argmax(node.probs)==node.label),total + 1, pred
 
 
     def backProp(self,node,error=None):

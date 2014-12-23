@@ -4,7 +4,8 @@ import collections
 UNK = 'UNK'
 
 class Node:
-    def __init__(self,label,word=None):
+    def __init__(self,id,label,word=None):
+        self.id = id
         self.label = label 
         self.word = word
         self.parent = None
@@ -18,16 +19,24 @@ class Tree:
     def __init__(self,root):
         self.root = root
 
+    def printSentence(self):
+        words = []
+        leftTraverse(self.root,nodeFn=appendNodeString, args=words)
+        print " ".join(words)
+
+    def putIdsAndLabels(self, id2label):
+        leftTraverse(self.root,nodeFn=putIdAndLabel, args=id2label)
+
 class TreeBuilder:
     def __init__(self, test=False):
       self.phrase2label = {}
-      self.id2phrase = {}
+      self.phrase2id = {}
       self.sentences = []
       self.test = test
 
     def build_trees(self, f):
       last_sentence_id = None
-      print "Reading trees.."
+      print "Reading trees in %s.." % f
       with open(f,'r') as fid:
         fid.readline()
         for line in fid:
@@ -41,8 +50,9 @@ class TreeBuilder:
             phrase = values[2:-1]
             label = int(values[-1])
 
-          self.phrase2label[flatten(phrase)] = label
-          self.id2phrase[phrase_id] = phrase
+          flat = flatten(phrase)
+          self.phrase2label[flat] = label
+          self.phrase2id[flat] = phrase_id
           if sentence_id != last_sentence_id and phrase:
             last_sentence_id = sentence_id
             self.sentences.append(phrase)
@@ -50,7 +60,9 @@ class TreeBuilder:
       return [Tree(self.build_node(s)) for s in self.sentences]
 
     def build_node(self, phrase):
-      node = Node(self.phrase2label.get(flatten(phrase), 2))
+      flat = flatten(phrase)
+      node = Node(self.phrase2id.get(flat, None),
+                  self.phrase2label.get(flat, 2))
       if len(phrase) == 1:
         node.isLeaf = True
         node.word = phrase[0]
@@ -82,6 +94,12 @@ def leftTraverse(root,nodeFn=None,args=None):
     if root.right is not None:
         leftTraverse(root.right,nodeFn,args)
 
+def appendNodeString(node, arg):
+  if node.isLeaf: arg.append(node.word)
+
+def putIdAndLabel(node, arg):
+  if node.id: arg[node.id] = node.label
+
 def countWords(node,words):
     if node.isLeaf:
         words[node.word] += 1
@@ -104,8 +122,8 @@ def buildWordMap():
     to integer values.
     """
     import cPickle as pickle
-    file = 'data/train.tsv'
-    trees = TreeBuilder().build_trees(file)
+    trees = TreeBuilder().build_trees('data/train.tsv')
+    trees += TreeBuilder(True).build_trees('data/test.tsv')
 
     print "Counting words.."
     words = collections.defaultdict(int)
@@ -128,6 +146,16 @@ def loadTrees(dataSet='train', test=False):
 
     for tree in trees:
         leftTraverse(tree.root,nodeFn=mapWords,args=wordMap)
+    return trees
+
+
+def unmapTrees(trees):
+    """
+    Maps leaf node words ids back to words and label ids to labels.
+    """
+    reverseWordMap = {v: k for k, v in loadWordMap().items()}
+    for tree in trees:
+        leftTraverse(tree.root, nodeFn=mapWords, args=reverseWordMap)
     return trees
 
       
