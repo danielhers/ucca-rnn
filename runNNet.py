@@ -59,7 +59,7 @@ def run(args=None):
             rnn.toFile(fid)
 
 def test(netFile,dataSet):
-    trees = tr.loadTrees(dataSet)
+    trees = tr.loadTrees(dataSet, test=True)
     assert netFile is not None, "Must give model to test"
     with open(netFile,'r') as fid:
         opts = pickle.load(fid)

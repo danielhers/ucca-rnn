@@ -15,45 +15,58 @@ class Node:
 
 class Tree:
 
-    def __init__(self,treeString,openChar='(',closeChar=')'):
-        tokens = []
-        self.open = '('
-        self.close = ')'
-        for toks in treeString.strip().split():
-            tokens += list(toks)
-        self.root = self.parse(tokens)
+    def __init__(self,root):
+        self.root = root
 
-    def parse(self, tokens, parent=None):
-        assert tokens[0] == self.open, "Malformed tree"
-        assert tokens[-1] == self.close, "Malformed tree"
+class TreeBuilder:
+    def __init__(self, test=False):
+      self.phrase2label = {}
+      self.id2phrase = {}
+      self.sentences = []
+      self.test = test
 
-        split = 2 # position after open and label
-        countOpen = countClose = 0
+    def build_trees(self, f):
+      last_sentence_id = None
+      print "Reading trees.."
+      with open(f,'r') as fid:
+        fid.readline()
+        for line in fid:
+          values = line.split()
+          phrase_id = int(values[0])
+          sentence_id = int(values[1])
+          if self.test:
+            phrase = values[2:]
+            label = None
+          else:
+            phrase = values[2:-1]
+            label = int(values[-1])
 
-        if tokens[split] == self.open: 
-            countOpen += 1
-            split += 1
-        # Find where left child and right child split
-        while countOpen != countClose:
-            if tokens[split] == self.open:
-                countOpen += 1
-            if tokens[split] == self.close:
-                countClose += 1
-            split += 1
+          self.phrase2label[flatten(phrase)] = label
+          self.id2phrase[phrase_id] = phrase
+          if sentence_id != last_sentence_id and phrase:
+            last_sentence_id = sentence_id
+            self.sentences.append(phrase)
 
-        # New node
-        node = Node(int(tokens[1])-1) # zero index labels
-        node.parent = parent 
+      return [Tree(self.build_node(s)) for s in self.sentences]
 
-        # leaf Node
-        if countOpen == 0:
-            node.word = ''.join(tokens[2:-1]).lower() # lower case?
-            node.isLeaf = True
-            return node
+    def build_node(self, phrase):
+      node = Node(self.phrase2label.get(flatten(phrase), 2))
+      if len(phrase) == 1:
+        node.isLeaf = True
+        node.word = phrase[0]
+      else:
+        for i in range(1, len(phrase)):
+          left, right = phrase[:i], phrase[i:]
+          if flatten(left) in self.phrase2label or len(right) == 1:
+            node.left = self.build_node(left)
+            node.right = self.build_node(right)
+            node.left.parent = node.right.parent = node
+            break
+      assert node.isLeaf or node.left, "%s %s %s" % (phrase, left, right)
+      return node
 
-        node.left = self.parse(tokens[2:split],parent=node)
-        node.right = self.parse(tokens[split:-1],parent=node)
-        return node
+def flatten(phrase):
+  return str([c for w in phrase for c in w])
 
         
 
@@ -91,10 +104,8 @@ def buildWordMap():
     to integer values.
     """
     import cPickle as pickle
-    file = 'trees/train.txt'
-    print "Reading trees.."
-    with open(file,'r') as fid:
-        trees = [Tree(l) for l in fid.readlines()]
+    file = 'data/train.tsv'
+    trees = TreeBuilder().build_trees(file)
 
     print "Counting words.."
     words = collections.defaultdict(int)
@@ -107,18 +118,18 @@ def buildWordMap():
     with open('wordMap.bin','w') as fid:
         pickle.dump(wordMap,fid)
 
-def loadTrees(dataSet='train'):
+def loadTrees(dataSet='train', test=False):
     """
     Loads training trees. Maps leaf node words to word ids.
     """
     wordMap = loadWordMap()
-    file = 'trees/%s.txt'%dataSet
-    print "Reading trees.."
-    with open(file,'r') as fid:
-        trees = [Tree(l) for l in fid.readlines()]
+    file = 'data/%s.tsv'%dataSet
+    trees = TreeBuilder(test).build_trees(file)
+
     for tree in trees:
         leftTraverse(tree.root,nodeFn=mapWords,args=wordMap)
     return trees
+
       
 if __name__=='__main__':
     buildWordMap()

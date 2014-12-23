@@ -4,7 +4,7 @@
 set -x
 
 infile=$1
-data=dev
+data=test
 
 echo $infile
 python runNNet.py --inFile $infile --test --data $data
