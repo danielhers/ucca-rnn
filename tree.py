@@ -1,5 +1,5 @@
-
-
+import numpy as np
+import gzip
 import collections
 UNK = 'UNK'
 
@@ -111,25 +111,48 @@ def loadWordMap():
     with open('wordMap.bin','r') as fid:
         return pickle.load(fid)
 
-def buildWordMap():
+def buildWordMap(wvecFile=None):
     """
     Builds map of all words in training set
     to integer values.
     """
     import cPickle as pickle
-    trees = build_trees('data/train.tsv')
-    trees += build_trees('data/test.tsv', True)
+    trees = build_trees('data/train.tsv')[0]
+    trees += build_trees('data/test.tsv', True)[0]
 
     print "Counting words.."
     words = collections.defaultdict(int)
     for tree in trees:
         leftTraverse(tree.root,nodeFn=countWords,args=words)
     
+    if wvecFile is not None:
+        print("Loading words from '%s'..." % wvecFile)
+        with gzip.open(wvecFile) as f:
+          for line in f:
+              fields = line.split()
+              word = fields[0]
+              words[word] += 1
+
     wordMap = dict(zip(words.iterkeys(),xrange(len(words))))
     wordMap[UNK] = len(words) # Add unknown as word
 
     with open('wordMap.bin','w') as fid:
         pickle.dump(wordMap,fid)
+
+
+def loadWordVectors(wvecDim, wvecFile, wordMap):
+    L = 0.01 * np.random.randn(wvecDim, len(wordMap))
+    with gzip.open(wvecFile) as f:
+        for line in f:
+            fields = line.split()
+            word = fields[0]
+            vec = fields[1:]
+            if len(vec) != wvecDim:
+                raise Exception("word vectors in %s must match wvecDim=%d" % (wvecFile, wvecDim))
+            index = wordMap.get(word, wordMap[UNK])
+            L[:, index] = vec
+    return L
+
 
 def loadTrees(dataSet='train', test=False):
     """
@@ -154,7 +177,7 @@ def unmapTrees(trees):
 
       
 if __name__=='__main__':
-    buildWordMap()
+    buildWordMap("../glove/glove.6B.50d.txt.gz")
     train, nodes = loadTrees()
 
 
