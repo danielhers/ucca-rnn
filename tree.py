@@ -4,8 +4,8 @@ import collections
 UNK = 'UNK'
 
 class Node:
-    def __init__(self,id,label,word=None):
-        self.id = id
+    def __init__(self,phraseId,label=None,word=None):
+        self.phraseId = phraseId
         self.label = label 
         self.word = word
         self.parent = None
@@ -24,63 +24,58 @@ class Tree:
         leftTraverse(self.root,nodeFn=appendNodeString, args=words)
         print " ".join(words)
 
-    def putIdsAndLabels(self, id2label):
-        leftTraverse(self.root,nodeFn=putIdAndLabel, args=id2label)
+    def addNodes(self, nodes):
+        leftTraverse(self.root,nodeFn=addNode, args=nodes)
 
-class TreeBuilder:
-    def __init__(self, test=False):
-      self.phrase2label = {}
-      self.phrase2id = {}
-      self.sentences = []
-      self.test = test
 
-    def build_trees(self, f):
-      last_sentence_id = None
-      print "Reading trees in %s.." % f
-      with open(f,'r') as fid:
-        fid.readline()
-        for line in fid:
-          values = line.split()
-          phrase_id = int(values[0])
-          sentence_id = int(values[1])
-          if self.test:
-            phrase = values[2:]
-            label = None
-          else:
-            phrase = values[2:-1]
-            label = int(values[-1])
+def build_trees(f, test=False):
+  nodesByPhrase = {}
+  nodesById = {}
+  trees = []
+  print "Reading trees in %s.." % f
+  with open(f,'r') as fid:
+    fid.readline() # skip title
+    for line in fid:
+      fields = line.split("\t")
+      try:
+        phraseId = int(fields[0])
+        node = Node(phraseId)
+        node.sentenceId = int(fields[1])
+        node.phrase = fields[2].strip()
+        node.label = 2 if test else int(fields[3])
+      except IndexError:
+        raise Exception("Invalid format: '%s'" % line)
+      node.tokens = node.phrase.split()
+      nodesByPhrase[node.phrase.lower()] = node
+      nodesById[phraseId] = node
 
-          flat = flatten(phrase)
-          self.phrase2label[flat] = label
-          self.phrase2id[flat] = phrase_id
-          if sentence_id != last_sentence_id and phrase:
-            last_sentence_id = sentence_id
-            self.sentences.append(phrase)
+      if node.phrase and (not trees or node.sentenceId != trees[-1].root.sentenceId):
+        trees.append(Tree(node))
 
-      return [Tree(self.build_node(s)) for s in self.sentences]
+  for tree in trees:
+    link_nodes(tree.root, nodesByPhrase)
 
-    def build_node(self, phrase):
-      flat = flatten(phrase)
-      node = Node(self.phrase2id.get(flat, None),
-                  self.phrase2label.get(flat, 2))
-      if len(phrase) == 1:
-        node.isLeaf = True
-        node.word = phrase[0]
-      else:
-        for i in range(1, len(phrase)):
-          left, right = phrase[:i], phrase[i:]
-          if flatten(left) in self.phrase2label or len(right) == 1:
-            node.left = self.build_node(left)
-            node.right = self.build_node(right)
-            node.left.parent = node.right.parent = node
-            break
-      assert node.isLeaf or node.left, "%s %s %s" % (phrase, left, right)
+  return trees, nodesById
+
+def link_nodes(node, nodesByPhrase):
+  tryAll = False
+  num_tokens = len(node.tokens)
+  for i in 2 * range(1, num_tokens):
+    left, right = [nodesByPhrase.get(" ".join(tokens).lower())
+                   for tokens in node.tokens[:i], node.tokens[i:]]
+    if left and right and (tryAll or \
+       node.phraseId + 1 in [child.phraseId for child in left, right]):
+      node.left, node.right = [link_nodes(child, nodesByPhrase)
+                               for child in left, right]
+      node.left.parent = node.right.parent = node
       return node
+    if i == num_tokens - 1: tryAll = True # go over again with no id constraint
+  else:
+    node.isLeaf = True
+    node.word = node.phrase
+    return node
+  raise Exception("Failed linking node '%s'" % node.phrase)
 
-def flatten(phrase):
-  return str([c for w in phrase for c in w])
-
-        
 
 def leftTraverse(root,nodeFn=None,args=None):
     """
@@ -97,8 +92,8 @@ def leftTraverse(root,nodeFn=None,args=None):
 def appendNodeString(node, arg):
   if node.isLeaf: arg.append(node.word)
 
-def putIdAndLabel(node, arg):
-  if node.id: arg[node.id] = node.label
+def addNode(node, arg):
+  if node.phraseId: arg[node.phraseId] = node
 
 def countWords(node,words):
     if node.isLeaf:
@@ -122,8 +117,8 @@ def buildWordMap():
     to integer values.
     """
     import cPickle as pickle
-    trees = TreeBuilder().build_trees('data/train.tsv')
-    trees += TreeBuilder(True).build_trees('data/test.tsv')
+    trees = build_trees('data/train.tsv')
+    trees += build_trees('data/test.tsv', True)
 
     print "Counting words.."
     words = collections.defaultdict(int)
@@ -141,12 +136,11 @@ def loadTrees(dataSet='train', test=False):
     Loads training trees. Maps leaf node words to word ids.
     """
     wordMap = loadWordMap()
-    file = 'data/%s.tsv'%dataSet
-    trees = TreeBuilder(test).build_trees(file)
+    trees, nodes = build_trees('data/%s.tsv'%dataSet, test)
 
     for tree in trees:
         leftTraverse(tree.root,nodeFn=mapWords,args=wordMap)
-    return trees
+    return trees, nodes
 
 
 def unmapTrees(trees):
@@ -161,7 +155,7 @@ def unmapTrees(trees):
       
 if __name__=='__main__':
     buildWordMap()
-    train = loadTrees()
+    train, nodes = loadTrees()
 
 
 

@@ -94,18 +94,15 @@ class RNN:
         if node.isLeaf:
             node.hActs = self.L[:,node.word]
             node.fprop = True
-
         else:
-            if not node.left.fprop: 
-                c,corr,tot,left = self.forwardProp(node.left, test)
-                cost += c
-                correct += corr
-                total += tot
-            if not node.right.fprop:
-                c,corr,tot,right = self.forwardProp(node.right, test)
-                cost += c
-                correct += corr
-                total += tot
+            c,corr,tot,left = self.forwardProp(node.left, test)
+            cost += c
+            correct += corr
+            total += tot
+            c,corr,tot,right = self.forwardProp(node.right, test)
+            cost += c
+            correct += corr
+            total += tot
             # Affine
             lr = np.hstack([node.left.hActs, node.right.hActs])
             node.hActs = np.dot(self.W,lr) + self.b
@@ -122,15 +119,16 @@ class RNN:
         node.fprop = True
 
         if test:
-            pred = Node(node.id, np.argmax(node.probs))
+            pred = Node(node.phraseId, np.argmax(node.probs))
             pred.word = node.word
+            pred.sentenceId = node.sentenceId
+            pred.phrase = node.phrase
             if node.isLeaf:
                 pred.isLeaf = True
             else:
                 pred.left = left
                 pred.right = right
-                left.parent = pred
-                right.parent = pred
+                left.parent = right.parent = pred
         else:
             pred = None
 

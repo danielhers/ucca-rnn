@@ -37,7 +37,7 @@ def run(args=None):
     
     print "Loading data..."
     # load training data
-    trees = tr.loadTrees()
+    trees, nodes = tr.loadTrees()
     opts.numWords = len(tr.loadWordMap())
 
     rnn = nnet.RNN(opts.wvecDim,opts.outputDim,opts.numWords,opts.minibatch)
@@ -59,7 +59,7 @@ def run(args=None):
             rnn.toFile(fid)
 
 def test(netFile,dataSet):
-    trees = tr.loadTrees(dataSet, test=True)
+    trees, nodes = tr.loadTrees(dataSet, test=True)
     assert netFile is not None, "Must give model to test"
     with open(netFile,'r') as fid:
         opts = pickle.load(fid)
@@ -71,13 +71,22 @@ def test(netFile,dataSet):
     cost,correct,total,pred = rnn.costAndGrad(trees,test=True)
     tr.unmapTrees(pred)
 
-    id2label = {}
     for tree in pred:
-      tree.putIdsAndLabels(id2label)
-    with open("predictions.csv", "w") as fid:
+      tree.addNodes(nodes)
+
+    f = "data/predictions.csv"
+    print "Writing predictions to %s..." % f
+    with open(f, "w") as fid:
       fid.write("PhraseId,Sentiment\n")
-      for id, label in sorted(id2label.iteritems()):
-        fid.write("%d,%d\n" % (id, label))
+      for id, node in sorted(nodes.iteritems()):
+        fid.write("%d,%d\n" % (id, node.label))
+
+    f = "data/out.tsv"
+    print "Writing whole output to %s..." % f
+    with open(f, "w") as fid:
+      fid.write("PhraseId\tSentenceId\tPhrase\tSentiment\n")
+      for id, node in sorted(nodes.iteritems()):
+        fid.write("%d\t%d\t%s\t%d\n" % (id, node.sentenceId, node.phrase, node.label))
 
 
 if __name__=='__main__':
