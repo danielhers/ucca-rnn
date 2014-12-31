@@ -1,4 +1,5 @@
 import collections
+from copy import copy
 import pickle
 import xml.etree.ElementTree as ET
 import gzip
@@ -6,7 +7,9 @@ import numpy as np
 from glob import glob
 from io import TextIOWrapper
 import sys
+
 from ucca import convert, layer0
+from ucca.layer0 import NodeTags as TokenTags
 
 UNK = 'UNK'
 
@@ -103,6 +106,11 @@ class Tree:
     def left_traverse(self, node_fn=None, args=None, args_root=None, args_leaf=None):
         self.root.left_traverse(node_fn, args, args_root, args_leaf, is_root=True)
 
+    def leaves(self):
+        leaves = []
+        self.left_traverse(lambda x,l: l.append(copy(x)), args_leaf=leaves)
+        return leaves
+
 
 def get_label(ucca_node):
     return ucca_node.incoming[0].tag if ucca_node.incoming else 'SCENE'
@@ -134,6 +142,14 @@ def load_word_map():
 def load_label_map():
     with open('label_map.bin', 'rb') as fid:
         return pickle.load(fid)
+
+
+def token_tag(token):
+    return TokenTags.Punct if token in string.punctuation else TokenTags.Word
+
+
+def tokens2nodes(tokens):
+    return [Node(token_tag(token), token) for token in tokens]
 
 
 def build_word_map(trees, extra_words=None):

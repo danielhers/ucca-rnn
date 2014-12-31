@@ -27,27 +27,27 @@ class RNTN (RNN):
         self.b = np.zeros(self.wvec_dim)
 
         # Softmax weights
-        self.Ws = 0.01 * np.random.randn(self.output_dim, self.wvec_dim)
-        self.bs = np.zeros(self.output_dim)
+        self.Wl = 0.01 * np.random.randn(self.output_dim, self.wvec_dim)
+        self.bl = np.zeros(self.output_dim)
 
-        self.stack = [self.L, self.V, self.W, self.b, self.Ws, self.bs]
+        self.stack = [self.L, self.V, self.W, self.b, self.Wl, self.bl]
 
         # Gradients
         self.dV = np.empty((self.wvec_dim, 2 * self.wvec_dim, 2 * self.wvec_dim))
         self.dW = np.empty(self.W.shape)
         self.db = np.empty(self.wvec_dim)
-        self.dWs = np.empty(self.Ws.shape)
-        self.dbs = np.empty(self.output_dim)
+        self.dWl = np.empty(self.Wl.shape)
+        self.dbl = np.empty(self.output_dim)
 
 
     def init_cost_and_grad(self):
-        self.L, self.V, self.W, self.b, self.Ws, self.bs = self.stack
+        self.L, self.V, self.W, self.b, self.Wl, self.bl = self.stack
         # Zero gradients
         self.dV[:] = 0
         self.dW[:] = 0
         self.db[:] = 0
-        self.dWs[:] = 0
-        self.dbs[:] = 0
+        self.dWl[:] = 0
+        self.dbl[:] = 0
         self.dL = collections.defaultdict(self.default_vec)
 
 
@@ -55,7 +55,7 @@ class RNTN (RNN):
         # Add L2 Regularization 
         cost += (self.rho / 2) * np.sum(self.V ** 2)
         cost += (self.rho / 2) * np.sum(self.W ** 2)
-        cost += (self.rho / 2) * np.sum(self.Ws ** 2)
+        cost += (self.rho / 2) * np.sum(self.Wl ** 2)
 
 
     def grad(self, scale):
@@ -64,8 +64,8 @@ class RNTN (RNN):
             scale * (self.dV + self.rho * self.V),
             scale * (self.dW + self.rho * self.W),
             scale * self.db,
-            scale * (self.dWs + self.rho * self.Ws),
-            scale * self.dbs
+            scale * (self.dWl + self.rho * self.Wl),
+            scale * self.dbl
         ]
 
 

@@ -1,7 +1,7 @@
 import numpy as np
 import collections
 from scipy.spatial.distance import cdist
-from ucca_tree import Node, Tree
+from ucca_tree import Node, Tree, copy_leaves, merge
 
 np.seterr(over='raise', under='raise')
 
@@ -25,17 +25,23 @@ class RNN (object):
         self.W = 0.01 * np.random.randn(self.wvec_dim, 2 * self.wvec_dim)
         self.b = np.zeros(self.wvec_dim)
 
-        # Softmax weights
-        self.Ws = 0.01 * np.random.randn(self.output_dim, self.wvec_dim)
-        self.bs = np.zeros(self.output_dim)
+        # Score weights
+        self.Ws = 0.01 * np.random.randn(1, self.wvec_dim)
+        self.bs = np.zeros(1)
 
-        self.stack = [self.L, self.W, self.b, self.Ws, self.bs]
+        # Label weights for softmax
+        self.Wl = 0.01 * np.random.randn(self.output_dim, self.wvec_dim)
+        self.bl = np.zeros(self.output_dim)
+
+        self.stack = [self.L, self.W, self.b, self.Ws, self.Wl, self.bl]
 
         # Gradients
         self.dW = np.empty(self.W.shape)
         self.db = np.empty(self.wvec_dim)
-        self.dWs = np.empty(self.Ws.shape)
-        self.dbs = np.empty(self.output_dim)
+        self.dWs = np.empty(self.Wl.shape)
+        self.dbs = np.empty(1)
+        self.dWl = np.empty(self.Wl.shape)
+        self.dbl = np.empty(self.output_dim)
 
 
     def cost_and_grad(self, mb_data, test=False):
@@ -43,10 +49,17 @@ class RNN (object):
         Each datum in the minibatch is a tree.
         Forward prop each tree.
         Backprop each tree.
-        Returns
+        If test is False, returns
            cost
            Gradient w.r.t. W, Ws, b, bs
            Gradient w.r.t. L in sparse form.
+        Otherwise, returns
+           average cost
+           # correct
+           # total
+           predicted trees
+        If test is "labels", predict only the tree labels
+        If test is "structure", predict their structure too
         """
 
         self.init_cost_and_grad()
@@ -55,9 +68,7 @@ class RNN (object):
         if test:
             return (1. / len(mb_data)) * cost, correct, total, trees
 
-        # Back prop each tree in minibatch
-        for tree in mb_data:
-            self.back_prop(tree.root)
+        self.batch_back_prop(mb_data)
 
         # scale cost and grad by mb size
         scale = (1. / self.mb_size)
@@ -69,13 +80,25 @@ class RNN (object):
         return scale * cost, self.grad(scale)
 
 
+    def init_cost_and_grad(self):
+        self.L, self.W, self.b, self.Ws, self.bs, self.Wl, self.bl = self.stack
+        # Zero gradients
+        self.dW[:] = 0
+        self.db[:] = 0
+        self.dWs[:] = 0
+        self.dbs[:] = 0
+        self.dWl[:] = 0
+        self.dbl[:] = 0
+        self.dL = collections.defaultdict(self.default_vec)
+
+
+
     def batch_forward_prop(self, mb_data, test):
         # Forward prop each tree in minibatch
         cost = correct = total = 0.0
         trees = []
         for tree in mb_data:
-            c, corr, tot, pred = self.forward_prop(tree.root,
-                                                   pred_tree="labels" if test else None)
+            c, corr, tot, pred = self.forward_prop(tree, test)
             cost += c
             correct += corr
             total += tot
@@ -84,20 +107,17 @@ class RNN (object):
         return correct, cost, total, trees
 
 
-    def init_cost_and_grad(self):
-        self.L, self.W, self.b, self.Ws, self.bs = self.stack
-        # Zero gradients
-        self.dW[:] = 0
-        self.db[:] = 0
-        self.dWs[:] = 0
-        self.dbs[:] = 0
-        self.dL = collections.defaultdict(self.default_vec)
+    def batch_back_prop(self, mb_data):
+        # Back prop each tree in minibatch
+        for tree in mb_data:
+            self.back_prop(tree.root)
 
 
     def regularize(self, cost):
         # Add L2 Regularization
         cost += (self.rho / 2) * np.sum(self.W ** 2)
         cost += (self.rho / 2) * np.sum(self.Ws ** 2)
+        cost += (self.rho / 2) * np.sum(self.Wl ** 2)
         return cost
 
 
@@ -107,44 +127,99 @@ class RNN (object):
             scale * (self.dW + self.rho * self.W),
             scale * self.db,
             scale * (self.dWs + self.rho * self.Ws),
-            scale * self.dbs
+            scale * self.dbs,
+            scale * (self.dWl + self.rho * self.Wl),
+            scale * self.dbl
         ]
 
 
-    def forward_prop(self, node, pred_tree=None):
+    def forward_prop(self, node, test=None):
+        if test == "structure":
+            return self.forward_prop_structure(node.leaves())
+        else:
+            return self.forward_prop_labels(node.root, test)
+
+
+    def forward_prop_structure(self, leaves):
+
+        for node in leaves:
+            node.h_acts = self.L[:, node.word]
+
+        nodes = leaves[:] # copy list
+        while True:
+            if len(nodes) == 1:
+                i = 0
+            else:
+                parents = [self.merge(pair) for pair in zip(nodes[:-1], nodes[1:])]
+                i = np.argmax([parent.score for parent in parents])
+                nodes[i] = parents[i] # replace left child with parent
+                del nodes[i + 1] # remove right child
+            self.softmax(nodes[i])
+
+
+        cost = correct = total = 0.0
+
+        children = []
+        pred = None
+        if len(leaves) == 1: # got to the root
+            node = leaves[0]
+            self.hidden_forward_prop(node)
+
+
+        node.fprop = True
+
+        if test:
+            pred = Node(np.argmax(node.probs))
+            pred.word = node.word
+            if node.is_leaf:
+                pred.is_leaf = True
+            else:
+                pred.set_children_binarized(children)
+
+        return cost - np.log(node.probs[node.label]),\
+               correct + (np.argmax(node.probs) == node.label),\
+               total + 1,\
+               pred
+
+
+    def merge(self, nodes):
+        # Merge nodes and score the potential parent
+        parent = Node(None)
+        parent.set_children_binarized(nodes)
+        self.hidden_forward_prop(parent)
+        parent.score = self.Ws.dot(parent.h_acts) + self.bs
+        return parent
+
+
+    def forward_prop_labels(self, node, test=None):
+
         cost = correct = total = 0.0
 
         children = []
         pred = None
         if node.is_leaf:
             node.h_acts = self.L[:, node.word]
-        else:
+        else: # predict labels
             for child in (node.left, node.right):
                 if not child.fprop:
-                    c, corr, tot, pred = self.forward_prop(child, pred_tree)
+                    c, corr, tot, pred = self.forward_prop(child, test)
                     cost += c
                     correct += corr
                     total += tot
                     children.append(pred)
             self.hidden_forward_prop(node)
 
-        # Softmax
-        node.probs = np.dot(self.Ws, node.h_acts) + self.bs
-        node.probs -= np.max(node.probs)
-        node.probs = np.exp(node.probs)
-        node.probs /= np.sum(node.probs)
+        self.softmax(node)
 
         node.fprop = True
 
-        if pred_tree is not None:
+        if test:
             pred = Node(np.argmax(node.probs))
             pred.word = node.word
             if node.is_leaf:
                 pred.is_leaf = True
             else:
-                pred.left, pred.right = children
-                for child in children:
-                    child.parent = pred
+                pred.set_children_binarized(children)
 
         return cost - np.log(node.probs[node.label]),\
                correct + (np.argmax(node.probs) == node.label),\
@@ -162,6 +237,14 @@ class RNN (object):
         node.h_acts = np.tanh(node.h_acts)
 
 
+    def softmax(self, node):
+        # Softmax for label probabilities
+        node.probs = np.dot(self.Wl, node.h_acts) + self.bl
+        node.probs -= np.max(node.probs)
+        node.probs = np.exp(node.probs)
+        node.probs /= np.sum(node.probs)
+
+
     def back_prop(self, node, error=None):
 
         # Clear nodes
@@ -170,15 +253,15 @@ class RNN (object):
         # Softmax grad
         deltas = node.probs
         deltas[node.label] -= 1.0
-        self.dWs += np.outer(deltas, node.h_acts)
-        self.dbs += deltas
-        deltas = np.dot(self.Ws.T, deltas)
+        self.dWl += np.outer(deltas, node.h_acts)
+        self.dbl += deltas
+        deltas = np.dot(self.Wl.T, deltas)
 
         if error is not None:
             deltas += error
 
         # deltas *= (node.h_acts != 0)
-        deltas *= (1 - node.h_acts ** 2)
+        deltas *= (1 - node.h_acts ** 2) # (tanh)' = 1-tanh^2
 
         # Leaf nodes update word vecs
         if node.is_leaf:
